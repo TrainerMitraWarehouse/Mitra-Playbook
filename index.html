@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra Playbook</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
+        
+        /* Sidebar */
+        nav { width: 280px; height: 100vh; background: white; border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
+        nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; }
+        #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
+        #searchInput:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
+
+        nav ul { list-style: none; padding: 0; }
+        nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        nav li:hover { background: #f1f5f9; }
+        nav li.active { background: var(--primary); color: white; }
+
+        /* Main Content */
+        main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); }
+        .content-section { display: none; } 
+        .content-section.active { display: block; } 
+
+        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .badge { background: #dbeafe; color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        h3 { color: var(--primary); margin: 15px 0 10px 0; font-size: 1.5rem; }
+        p { line-height: 1.6; color: #475569; }
+        .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>Mitra Playbook</h2>
+        <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
+        
+        <ul id="menuList">
+            <li onclick="openTab(event, 'semua')" class="active">📚 Semua Materi</li>
+            <li onclick="openTab(event, 'sop')">📋 SOP</li>
+            <li onclick="openTab(event, 'pembayaran')">💰 Skema Pembayaran</li>
+            <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
+            <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="semua" class="content-section active">
+            <div class="card">
+                <span class="badge">PROSEDUR</span>
+                <h3>Cara Menjalankan Order</h3>
+                <p>Pastikan aplikasi dalam posisi 'Aktif'. Terima pesanan dalam waktu kurang dari 30 detik untuk menjaga skor performa tetap hijau.</p>
+            </div>
+            <div class="card">
+                <span class="badge">KEUANGAN</span>
+                <h3>Sistem Bagi Hasil</h3>
+                <p>Pembagian komisi dilakukan secara otomatis setiap hari Senin. Mitra mendapatkan 80% dari nilai total transaksi bersih.</p>
+            </div>
+        </div>
+
+        <div id="sop" class="content-section">
+            <div class="card">
+                <span class="badge">SOP</span>
+                <h3>Standar Pelayanan Konsumen</h3>
+                <p>1. Selalu menyapa konsumen dengan ramah.<br>2. Menggunakan atribut lengkap (Jaket & Helm).<br>3. Konfirmasi titik jemput sebelum berangkat.</p>
+            </div>
+        </div>
+
+        <div id="pembayaran" class="content-section">
+            <div class="card">
+                <span class="badge">Skema Pembayaran</span>
+                <h3>New Joiner</h3>
+                <p>Mitra OJT yang bergabung tanggal 25-10, akan menerima komisi pertama kali pada tanggal 19 dengan tutup buku dari tanggal join sampai tanggal 15.</p>
+                <p>Mitra OJT yang bergabung tanggal 11-24, akan menerima komisi pertama kali pada tanggal 05 dengan tutup buku dari tanggal join sampai akhir bulan.</p>
+            </div>
+            <div class="card">
+                <span class="badge">Skema Pembayaran</span>
+                <h3>Mitra Reguler</h3>
+                <p>Komisi bagi mitra reguler (yang telah melewati masa ojt), dibayarkan pada tanggal 05 setiap bulannya.</p>
+            </div>
+        </div>
+
+        <div id="insentif-bsc" class="content-section">
+            <div class="card">
+                <span class="badge">Syarat & Ketentuan</span>
+                <h3>Mitra Warehouse</h3>
+                <p>Jika terjadi kendala pada penerimaan BSC, silahkan menghubungi SPV masing - masing.</p>
+                <img src="Image_html/SKBSC.png" alt="S&K Insentif BSC" class="content-image">
+            </div>
+        </div>
+
+        <div id="bantuan" class="content-section">
+            <div class="card">
+                <span class="badge">BANTUAN</span>
+                <h3>Kontak Darurat</h3>
+                <p>Jika terjadi kendala di lapangan, hubungi pusat bantuan melalui tombol SOS di aplikasi atau telepon ke 0800-123-456.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Reset input pencarian saat pindah tab agar tidak bingung
+            document.getElementById('searchInput').value = "";
+            
+            let sections = document.getElementsByClassName("content-section");
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove("active");
+                // Reset tampilan card di dalam section agar muncul kembali
+                let cards = sections[i].getElementsByClassName('card');
+                for(let j=0; j<cards.length; j++) { cards[j].style.display = "block"; }
+            }
+
+            let menuItems = document.querySelectorAll("#menuList li");
+            menuItems.forEach(item => item.classList.remove("active"));
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function searchGlobal() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            // Jika kolom cari kosong, biarkan sistem Tab yang bekerja
+            if (input === "") {
+                // Opsional: bisa ditambahkan logika untuk kembali ke tampilan Tab normal
+            }
+
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].innerText.toLowerCase();
+                if (text.includes(input)) {
+                    cards[i].style.display = "block";
+                    // Tampilkan parent section-nya agar card yang ketemu tidak tersembunyi
+                    cards[i].parentElement.classList.add("active");
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
