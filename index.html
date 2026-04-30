@@ -43,8 +43,8 @@
         <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
         
         <ul id="menuList">
-            <li onclick="openTab(event, 'semua')" class="active">📚 Semua Materi</li>
             <li onclick="openTab(event, 'sop')">📋 SOP</li>
+            <li onclick="openTab(event, 'Seragam & Atribut')">📋 SOP</li>
             <li onclick="openTab(event, 'Absensi')">🗓️ Absensi</li>
             <li onclick="openTab(event, 'pembayaran')">💵 Skema Pembayaran</li>
             <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
@@ -53,19 +53,6 @@
     </nav>
 
     <main>
-        <div id="semua" class="content-section active">
-            <div class="card">
-                <span class="badge">PROSEDUR</span>
-                <h3>Cara Menjalankan Order</h3>
-                <p>Pastikan aplikasi dalam posisi 'Aktif'. Terima pesanan dalam waktu kurang dari 30 detik untuk menjaga skor performa tetap hijau.</p>
-            </div>
-            <div class="card">
-                <span class="badge">KEUANGAN</span>
-                <h3>Sistem Bagi Hasil</h3>
-                <p>Pembagian komisi dilakukan secara otomatis setiap hari Senin. Mitra mendapatkan 80% dari nilai total transaksi bersih.</p>
-            </div>
-        </div>
-
         <div id="sop" class="content-section">
             <div class="card">
                 <span class="badge">SOP</span>
@@ -73,6 +60,22 @@
                 <p>Selalu menyapa konsumen dengan ramah.<br>2. Menggunakan atribut lengkap (Jaket & Helm).<br>3. Konfirmasi titik jemput sebelum berangkat.</p>
             </div>
         </div>
+        <div id="Grooming/cara berpakaian" class="content-section">
+            <div class="card">
+                <span class="badge">Ketentuan Berpakaian</span>
+                <h3>Warna Pakaian</h3>
+                <p>Berikut ini ketentuan warna pakaian Mitra Astro.</p>
+                <img src="Wseragam.png" alt="Ketentuan Warna Seragam" class="content-image">
+            </div>
+            <div class="card">
+                <span class="badge">Ketentuan Berpakaian</span>
+                <h3>Grooming</h3>
+                <p>Berikut ini ketentuan berpakaian Mitra Astro.</p>
+                <img src="grooming.png" alt="Grooming" class="content-image">
+            </div>
+        </div>
+
+
         <div id="Absensi" class="content-section">
             <div class="card">
                 <span class="badge">Absensi</span>
