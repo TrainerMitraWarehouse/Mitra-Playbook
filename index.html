@@ -10,27 +10,83 @@
             --bg: #fdeaf8;
             --text: #1e293b;
             --border: #f3d7ec;
+            --white: #ffffff;
         }
+        
         body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
         
         /* Sidebar */
-        nav { width: 280px; height: 100vh; background: white; border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
+        nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
         nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; }
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
-        #searchInput:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
-
         nav ul { list-style: none; padding: 0; }
         nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
         nav li:hover { background: #f7d3f3; }
         nav li.active { background: var(--primary); color: white; }
 
         /* Main Content */
-        main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); }
+        main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); box-sizing: border-box; }
+
+        /* --- BANNER HIGHLIGHT GAMBAR + TULISAN BERGERAK --- */
+        .highlight-container {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
+            border: 1px solid var(--border);
+        }
+
+        /* Bagian Gambar Banner */
+        .banner-image-wrapper {
+            width: 100%;
+            height: 180px; /* Sesuaikan tinggi gambar */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Agar gambar tidak gepeng */
+        }
+
+        /* Bagian Tulisan Bergerak (Marquee Style) */
+        .running-text-wrapper {
+            background: var(--primary);
+            color: white;
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .running-text {
+            display: inline-block;
+            padding-left: 100%;
+            font-weight: 700;
+            font-size: 1.1rem;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Berhenti saat kursor diarahkan (Optional) */
+        .running-text-wrapper:hover .running-text {
+            animation-play-state: paused;
+        }
+
+        /* Content Sections */
         .content-section { display: none; } 
         .content-section.active { display: block; } 
-
-        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .badge { background: #dbeafe; color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .badge { background: #fdf2fb; color: var(--primary); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
         h3 { color: var(--primary); margin: 15px 0 10px 0; font-size: 1.5rem; }
         p { line-height: 1.6; color: #475569; }
         .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
@@ -41,105 +97,54 @@
     <nav>
         <h2>Mitra Playbook</h2>
         <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
-        
         <ul id="menuList">
-            <li onclick="openTab(event, 'Seragam & Atribut')">👕 Seragam & Atribut</li>
+            <li class="active" onclick="openTab(event, 'Seragam & Atribut')">👕 Seragam & Atribut</li>
             <li onclick="openTab(event, 'Absensi')">🗓️ Absensi</li>
             <li onclick="openTab(event, 'pembayaran')">💵 Skema Pembayaran</li>
             <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
-             <li onclick="openTab(event, 'BPJS JKK-JKM')">🪪 BPJS JKK-JKM</li>
+            <li onclick="openTab(event, 'BPJS JKK-JKM')">🪪 BPJS JKK-JKM</li>
             <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
         </ul>
     </nav>
 
     <main>
-        <div id="Seragam & Atribut" class="content-section">
-            <div class="card">
-                <span class="badge">Ketentuan Berpakaian</span>
-                <h3>Warna Pakaian</h3>
-                <p>.</p>
-                <img src="Wseragam.png" alt="Ketentuan Warna Seragam" class="content-image">
+        <div class="highlight-container">
+            <div class="banner-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop" alt="Banner Informasi">
             </div>
-            <div class="card">
-                <h3>Contoh Berpakaian</h3>
-                <p>.</p>
-                <img src="grooming1.png" alt="Grooming" class="content-image">
+            <div class="running-text-wrapper">
+                <div class="running-text">
+                    📢 PENGUMUMAN: Mohon pastikan absensi dilakukan sebelum jam 23.59 WIB agar komisi cair tepat waktu! &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; 🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
+                </div>
             </div>
         </div>
 
+        <div id="Seragam & Atribut" class="content-section active">
+            <div class="card">
+                <span class="badge">Ketentuan Berpakaian</span>
+                <h3>Warna Pakaian</h3>
+                <img src="Wseragam.png" alt="Warna Seragam" class="content-image">
+            </div>
+        </div>
 
         <div id="Absensi" class="content-section">
             <div class="card">
                 <span class="badge">Absensi</span>
                 <h3>Astro Crew</h3>
-                <p>Berikut ini tata cara melakukan absen menggunakan Astro Crew.</p>
-                <img src="absenmasuk.png" alt="Astro Crew" class="content-image">
-                 <img src="absenkeluar.png" alt="Astro Crew" class="content-image">
+                <img src="absenmasuk.png" class="content-image">
             </div>
         </div>
 
-
-        <div id="pembayaran" class="content-section">
-            <div class="card">
-                <span class="badge">Skema Pembayaran</span>
-                <h3>New Joiner</h3>
-                <p>Mitra OJT yang bergabung tanggal 25-10, akan menerima komisi pertama kali pada tanggal 19 dengan tutup buku dari tanggal join sampai tanggal 15.</p>
-                <p>Mitra OJT yang bergabung tanggal 11-24, akan menerima komisi pertama kali pada tanggal 05 dengan tutup buku dari tanggal join sampai akhir bulan.</p>
-            </div>
-            <div class="card">
-                <span class="badge">Skema Pembayaran</span>
-                <h3>Mitra Reguler</h3>
-                <p>Komisi bagi mitra reguler (yang telah melewati masa ojt), dibayarkan pada tanggal 05 setiap bulannya.</p>
-            </div>
-        </div>
-
-        <div id="insentif-bsc" class="content-section">
-            <div class="card">
-                <span class="badge">Syarat & Ketentuan</span>
-                <h3>Mitra Warehouse</h3>
-                <p>Jika terjadi kendala pada penerimaan BSC, silahkan menghubungi SPV masing - masing.</p>
-                <img src="SKBSC.png" alt="S&K Insentif BSC" class="content-image">
-            </div>
-        </div>
-
-        <div id="BPJS JKK-JKM" class="content-section">
-            <div class="card">
-                <span class="badge">Cara dan Ketentuan Claim</span>
-                <h3>JKK (Jaminan Kecelakaan Kerja)</h3>
-                <p>1. Download aplikasi JMO (Jamsostek Mobile).</p>
-                <p>2. Cek pada aplikasi JMO (Jamsostek Mobile) untuk mengetahui fasilitas kesehatan yang bekerjasama dengan BPJSTK.</p>
-                <p>3. Tunjukan tanda pengenal seperti KTP/ Kartu kepesertaan BPJS JKK.</p>
-                <p>4. Lapor kepada SPV, maksimal 2 x 24 jam untuk dibantu proses claim.</p>
-                <img src="BPJS.png" alt="Syarat & Ketentuan Claim BPJS JKK" class="content-image">
-            </div>
-        </div>
-
-        
-        <div id="bantuan" class="content-section">
-            <div class="card">
-                <span class="badge">BANTUAN</span>
-                <h3>Kontak Darurat</h3>
-                <p>Jika terjadi kendala di lapangan, hubungi pusat bantuan melalui tombol SOS di aplikasi atau telepon ke 0800-123-456.</p>
-            </div>
-        </div>
-    </main>
+        </main>
 
     <script>
         function openTab(evt, tabName) {
-            // Reset input pencarian saat pindah tab agar tidak bingung
-            document.getElementById('searchInput').value = "";
-            
             let sections = document.getElementsByClassName("content-section");
             for (let i = 0; i < sections.length; i++) {
                 sections[i].classList.remove("active");
-                // Reset tampilan card di dalam section agar muncul kembali
-                let cards = sections[i].getElementsByClassName('card');
-                for(let j=0; j<cards.length; j++) { cards[j].style.display = "block"; }
             }
-
             let menuItems = document.querySelectorAll("#menuList li");
             menuItems.forEach(item => item.classList.remove("active"));
-
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
@@ -147,17 +152,10 @@
         function searchGlobal() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('card');
-            
-            // Jika kolom cari kosong, biarkan sistem Tab yang bekerja
-            if (input === "") {
-                // Opsional: bisa ditambahkan logika untuk kembali ke tampilan Tab normal
-            }
-
             for (let i = 0; i < cards.length; i++) {
                 let text = cards[i].innerText.toLowerCase();
                 if (text.includes(input)) {
                     cards[i].style.display = "block";
-                    // Tampilkan parent section-nya agar card yang ketemu tidak tersembunyi
                     cards[i].parentElement.classList.add("active");
                 } else {
                     cards[i].style.display = "none";
