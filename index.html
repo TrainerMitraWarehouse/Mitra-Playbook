@@ -294,63 +294,67 @@
 
         // --- LOGIKA UTAMA KALKULATOR TANGGAL & UANG ---
         function hitungKomisiDanJadwal() {
-            let joinDateVal = document.getElementById('joinDate').value;
-            let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
-            let rate = parseFloat(document.getElementById('rateKomisi').value) || 0;
-            
-            if (!joinDateVal) {
-                alert("Silakan pilih Tanggal Join terlebih dahulu!");
-                return;
-            }
+    let joinDateVal = document.getElementById('joinDate').value;
+    let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
+    let rate = parseFloat(document.getElementById('rateKomisi').value) || 0;
+    
+    if (!joinDateVal) {
+        alert("Silakan pilih Tanggal Join terlebih dahulu!");
+        return;
+    }
 
-            // 1. Hitung Uang Komisi
-            let totalUang = shift * rate;
-            let formatRupiah = new Intl.NumberFormat('id-ID', {
-                style: 'currency', currency: 'IDR', minimumFractionDigits: 0
-            }).format(totalUang);
-            document.getElementById('totalKomisiResult').innerText = formatRupiah;
+    // 1. Hitung Uang Komisi
+    let totalUang = shift * rate;
+    let formatRupiah = new Intl.NumberFormat('id-ID', {
+        style: 'currency', currency: 'IDR', minimumFractionDigits: 0
+    }).format(totalUang);
+    document.getElementById('totalKomisiResult').innerText = formatRupiah;
 
-            // 2. Logika Tanggal Pembayaran
-            let dateObj = new Date(joinDateVal);
-            let tanggalJoin = dateObj.getDate();
-            let bulanJoin = dateObj.getMonth(); // 0 = Jan, 1 = Feb, ..., 11 = Des
-            let tahunJoin = dateObj.getFullYear();
+    // 2. Logika Tanggal Pembayaran Baru
+    let dateObj = new Date(joinDateVal);
+    let tanggalJoin = dateObj.getDate();
+    let bulanJoin = dateObj.getMonth(); // 0 = Jan, 1 = Feb, 3 = Apr, 4 = Mei, dst.
+    let tahunJoin = dateObj.getFullYear();
 
-            let tanggalBayar = 0;
-            let targetBulan = 0;
-            let targetTahun = tahunJoin;
+    let tanggalBayar = 0;
+    let targetBulan = 0;
+    let targetTahun = tahunJoin;
 
-            // Aturan 25 - 10 (Bayar tanggal 19 bulan berikutnya)
-            // Note: Tanggal 25-31 masuk ke periode gajian bulan depan +1, tanggal 1-10 juga gajian bulan depan +1
-            if (tanggalJoin >= 25) {
-                tanggalBayar = 19;
-                targetBulan = bulanJoin + 1; 
-            } else if (tanggalJoin <= 10) {
-                tanggalBayar = 19;
-                targetBulan = bulanJoin + 1;
-            } 
-            // Aturan 11 - 24 (Bayar tanggal 05 bulan berikutnya)
-            else {
-                tanggalBayar = 5;
-                targetBulan = bulanJoin + 1;
-            }
+    // --- KONDISI 1: Periode 25 (Bulan Lalu) sampai 10 (Bulan Ini) ---
+    // Contoh: 25 April - 10 Mei -> Gajian 19 Mei
+    if (tanggalJoin >= 25) {
+        tanggalBayar = 19;
+        targetBulan = bulanJoin + 1; // Jika join 25 April (Bulan 3), gajian Mei (Bulan 4)
+    } 
+    else if (tanggalJoin <= 10) {
+        tanggalBayar = 19;
+        targetBulan = bulanJoin;     // Jika join 5 Mei (Bulan 4), gajian tetap Mei (Bulan 4)
+    }
+    // --- KONDISI 2: Periode 11 sampai 24 (Bulan Ini) ---
+    // Contoh: 11 Mei - 24 Mei -> Gajian 5 Juni
+    else if (tanggalJoin >= 11 && tanggalJoin <= 24) {
+        tanggalBayar = 5;
+        targetBulan = bulanJoin + 1; // Jika join 11 Mei (Bulan 4), gajian Juni (Bulan 5)
+    }
 
-            // Antisipasi jika bulan meloncat melewati Desember ke Januari tahun berikutnya
-            if (targetBulan > 11) {
-                targetBulan = targetBulan - 12;
-                targetTahun += 1;
-            }
+    // Koreksi jika target bulan berganti tahun (Melewati Desember)
+    if (targetBulan > 11) {
+        targetBulan = targetBulan - 12;
+        targetTahun += 1;
+    } else if (targetBulan < 0) {
+        targetBulan = 11;
+        targetTahun -= 1;
+    }
 
-            // Buat tanggal pencairan final
-            let gajianDate = new Date(targetTahun, targetBulan, tanggalBayar);
+    // Buat objek tanggal final pencairan
+    let gajianDate = new Date(targetTahun, targetBulan, tanggalBayar);
 
-            // Format tanggal Indonesia (Contoh: 19 Juni 2026)
-            let opsiFormat = { day: '2-digit', month: 'long', year: 'numeric' };
-            let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
+    // Format tanggal ke Bahasa Indonesia (Hari Bulan Tahun)
+    let opsiFormat = { day: '2-digit', month: 'long', year: 'numeric' };
+    let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
 
-            document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
-        }
-    </script>
+    document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
+}    </script>
 
 </body>
 </html>
