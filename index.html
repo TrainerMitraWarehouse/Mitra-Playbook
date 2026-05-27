@@ -404,8 +404,8 @@
             }
         }
     }
-</script>// --- LOGIKA UTAMA KALKULATOR TANGGAL & UANG ---
-        function hitungKomisiDanJadwal() {
+    // --- LOGIKA UTAMA KALKULATOR TANGGAL & UANG ---
+    function hitungKomisiDanJadwal() {
     let joinDateVal = document.getElementById('joinDate').value;
     let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
     let rate = parseFloat(document.getElementById('rateKomisi').value) || 0;
@@ -465,7 +465,9 @@
     let opsiFormat = { day: '2-digit', month: 'long', year: 'numeric' };
     let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
 
-    document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;}</script>
+    document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
+}
+</script>
 
 </body>
 </html>
