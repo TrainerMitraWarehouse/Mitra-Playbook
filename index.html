@@ -375,32 +375,6 @@
                     
     </main>
 
-    <script>
-        function openTab(evt, tabName) {
-            let sections = document.getElementsByClassName("content-section");
-            for (let i = 0; i < sections.length; i++) {
-                sections[i].classList.remove("active");
-            }
-            let menuItems = document.querySelectorAll("#menuList li");
-            menuItems.forEach(item => item.classList.remove("active"));
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-
-        function searchGlobal() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            for (let i = 0; i < cards.length; i++) {
-                let text = cards[i].innerText.toLowerCase();
-                if (text.includes(input)) {
-                    cards[i].style.display = "block";
-                    cards[i].parentElement.classList.add("active");
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-
         // --- LOGIKA UTAMA KALKULATOR TANGGAL & UANG ---
         function hitungKomisiDanJadwal() {
     let joinDateVal = document.getElementById('joinDate').value;
