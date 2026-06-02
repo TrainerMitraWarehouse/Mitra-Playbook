@@ -21,7 +21,7 @@
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
         nav ul { list-style: none; padding: 0; }
         nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
-        nav li:hover { background: ##bce2fd; }
+        nav li:hover { background: #bce2fd; } /* Perbaikan: Pagar double dihapus */
         nav li.active { background: var(--primary); color: white; }
 
         /* Main Content */
@@ -89,66 +89,16 @@
         .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
 
         /* --- KALKULATOR KOMISI LOGIC --- */
-        .calculator-group {
-            margin-bottom: 15px;
-        }
-        .calculator-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text);
-        }
-        .calculator-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            box-sizing: border-box;
-            outline: none;
-            font-size: 1rem;
-        }
-        .calculator-group input:focus {
-            border-color: var(--primary);
-        }
-        .btn-hitung {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-hitung:hover {
-            background: #802f77;
-        }
-        .result-container {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .result-box {
-            flex: 1;
-            min-width: 200px;
-            padding: 15px;
-            background: #fdf2fb;
-            border-left: 5px solid var(--primary);
-            border-radius: 4px;
-        }
-        .result-box h4 {
-            margin: 0 0 5px 0;
-            color: var(--text);
-        }
-        .result-box p {
-            margin: 0;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
+        .calculator-group { margin-bottom: 15px; }
+        .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
+        .calculator-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem; }
+        .calculator-group input:focus { border-color: var(--primary); }
+        .btn-hitung { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-hitung:hover { background: #802f77; }
+        .result-container { margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .result-box { flex: 1; min-width: 200px; padding: 15px; background: #fdf2fb; border-left: 5px solid var(--primary); border-radius: 4px; }
+        .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
+        .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
     </style>
 </head>
 <body>
@@ -157,16 +107,16 @@
         <h2>Mitra Playbook</h2>
         <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
         <ul id="menuList">
-            <li class="active" onclick="openTab(event, 'Lokasi Warehouse')">📍 Lokasi Warehouse</li>
-            <li onclick="openTab(event, 'Seragam & Atribut')">👕 Seragam & Atribut</li>
-            <li onclick="openTab(event, 'Absensi')">🗓️ Absensi</li>
+            <li class="active" onclick="openTab(event, 'lokasi-warehouse')">📍 Lokasi Warehouse</li>
+            <li onclick="openTab(event, 'seragam-atribut')">👕 Seragam & Atribut</li>
+            <li onclick="openTab(event, 'absensi')">🗓️ Absensi</li>
             <li onclick="openTab(event, 'pembayaran')">💵 Skema Pembayaran</li>
             <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
-            <li onclick="openTab(event, 'BPJS')">🪪 BPJS</li>
-            <li onclick="openTab(event, 'Astro Get Astro')">🧑‍🧒‍🧒 Astro Get Astro</li>
-            <li onclick="openTab(event, 'Izin Berbayar')">📩 Izin Berbayar</li>
-            <li onclick="openTab(event, 'Jenis-Jenis Pelanggaran')">🚫 Jenis-Jenis Pelanggaran</li>
-            <li onclick="openTab(event, 'Bantuan')">❓ Bantuan</li>
+            <li onclick="openTab(event, 'bpjs')">🪪 BPJS</li>
+            <li onclick="openTab(event, 'astro-get-astro')">🧑‍🧒‍🧒 Astro Get Astro</li>
+            <li onclick="openTab(event, 'izin-berbayar')">📩 Izin Berbayar</li>
+            <li onclick="openTab(event, 'jenis-pelanggaran')">🚫 Jenis-Jenis Pelanggaran</li>
+            <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
         </ul>
     </nav>
 
@@ -177,17 +127,18 @@
             </div>
             <div class="running-text-wrapper">
                 <div class="running-text">
-                    📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!  &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; 🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
+                    📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |     🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
                 </div>
             </div>
         </div>
 
-        <div id="Lokasi Warehouse" class="content-section">
+        <div id="lokasi-warehouse" class="content-section active">
             <div style="margin-top: 25px;">
                 <a href="https://share.google/WQrlRDGi2ulRbU9x7" 
                  target="_blank" 
                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
                  📌 Lokasi Warehouse Dry Cibitung</a>
+            </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Dry Cibitung (CBT)</h3>
@@ -199,6 +150,7 @@
                  target="_blank" 
                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
                  📌 Lokasi Warehouse Dry Sentul</a>
+            </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Dry Sentul (STL)</h3>
@@ -210,6 +162,7 @@
                  target="_blank" 
                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
                  📌 Lokasi Warehouse Fresh Cibinong</a>
+            </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Fresh Cibinong (CBN)</h3>
@@ -221,6 +174,7 @@
                  target="_blank" 
                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
                  📌 Lokasi Warehouse Fresh Bogor</a>
+            </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Fresh Bogor (BGR)</h3>
@@ -232,6 +186,7 @@
                  target="_blank" 
                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
                  📌 Lokasi Warehouse Frozen Pegangsaan</a>
+            </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Pegangsaan (PGS)</h3>
@@ -243,6 +198,7 @@
                  target="_blank" 
                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
                  📌 Lokasi Warehouse Frozen Srengseng</a>
+            </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Srengseng (SRG)</h3>
@@ -251,7 +207,7 @@
             </div>
         </div>
                 
-        <div id="Seragam & Atribut" class="content-section">
+        <div id="seragam-atribut" class="content-section">
             <div class="card">
                 <span class="badge">Grooming</span>
                 <h3>Warna Pakaian</h3>
@@ -264,7 +220,7 @@
             </div>
         </div>
 
-        <div id="Absensi" class="content-section">
+        <div id="absensi" class="content-section">
             <div class="card">
                 <span class="badge">Absensi</span>
                 <h3>Astro Crew</h3>
@@ -326,22 +282,22 @@
             <div class="card">
                 <span class="badge">Insentif BSC Warehouse Staff</span>
                 <h3>Syarat dan Ketentuan</h3>
-                <p>• HK &ge; 20 hari &rarr; mendapatkan 100% BSC</p>
-                <p>• HK 16-19 hari &rarr; mendapatkan BSC prorata</p>
+                <p>• HK ≥ 20 hari → mendapatkan 100% BSC</p>
+                <p>• HK 16-19 hari → mendapatkan BSC prorata</p>
                 <img src="bscprorata.png" class="content-image">
-                <p>• Mitra yang join setelah tanggal 1 &rarr; tetap berhak BSC jika HK &ge; 16 hari</p>
+                <p>• Mitra yang join setelah tanggal 1 → tetap berhak BSC jika HK ≥ 16 hari</p>
                 <p>• Mitra yang memiliki kurang dari 16 hari kerja maka tidak mendapatkan BSC pada bulan tersebut</p>
                 <p>• Tidak memiliki izin lebih dari dua kali, atau alpha (tidak hadir tanpa keterangan)</p>
                 <p>• Mitra harus tetap bekerja hingga minimal tanggal 18 bulan berikutnya</p>
                 <p>• Jika terdapat satu hari alpha atau lebih, maka mitra tidak berhak menerima BSC</p>
-                <p>• 1 hari izin &rarr; Mendapatkan 85% BSC yang diterima bulan itu</p>
-                <p>• 2 hari izin &rarr; Mendapatkan 40% BSC yang diterima bulan itu</p>
-                <p>• Lebih dari 2 kali izin &rarr; Tidak mendapatkan BSC</p>
+                <p>• 1 hari izin → Mendapatkan 85% BSC yang diterima bulan itu</p>
+                <p>• 2 hari izin → Mendapatkan 40% BSC yang diterima bulan itu</p>
+                <p>• Lebih dari 2 kali izin → Tidak mendapatkan BSC</p>
                 <p>• Telat maks 1 menit dalam 6x / Bulan = Gugur (Hangus) = Terminasi</p>
             </div>
         </div>   
         
-        <div id="BPJS" class="content-section">
+        <div id="bpjs" class="content-section">
             <div class="card">
                 <span class="badge">BPJS Jaminan Kecelakaan Kerja (JKK)</span>
                 <h3>Prosedur Klaim BPJS JKK)</h3>
@@ -361,7 +317,7 @@
             </div>
         </div>
         
-        <div id="Astro Get Astro" class="content-section">
+        <div id="astro-get-astro" class="content-section">
             <div class="card">
                 <span class="badge">Astro Get Astro</span>
                 <h3>Daftarkan rekanmu dan dapatkan komisi senilai Rp. 100.000,-</h3>
@@ -377,7 +333,8 @@
                  ▶️ Pengisian form Astro Get Astro 🧑🏻‍🚀</a>
             </div>
         </div>
-        <div id="Izin Berbayar" class="content-section">
+
+        <div id="izin-berbayar" class="content-section">
             <div class="card">
                 <span class="badge">Izin Berbayar</span>
                 <h3>Syarat dan Ketentuan</h3>
@@ -392,25 +349,25 @@
             </div>
         </div>
 
-        <div id="Jenis-Jenis Pelanggaran" class="content-section">
+        <div id="jenis-pelanggaran" class="content-section">
             <div class="card">
                 <span class="badge">Jenis-Jenis Pelanggaran</span>
                 <h3>Berikut ini merupakan jenis-jenis pelanggaran(Thorny Stick)</h3>
                 <p>Jika kamu menemukan pelanggaran, silahkan laporkan melalui link berikut ini</p>
                 <img src="pelaporan.png" class="content-image">
                 <div style="margin-top: 25px;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeemPOoY3fWvrXl0Rj3C005DjZe5R7rM04yLSCFWds9adiiNA/viewform" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 ▶️ Pelaporan Pelanggaran</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeemPOoY3fWvrXl0Rj3C005DjZe5R7rM04yLSCFWds9adiiNA/viewform" 
+                     target="_blank" 
+                     style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                     ▶️ Pelaporan Pelanggaran</a>
+                </div>
             </div>
-        </div>
             <div class="card">
                 <h3>Pelanggaran hukum</h3>
                 <p>• Terbukti melakukan segala jenis tindak pidana yang diatur oleh KUHP</p>
                 <p>• Vandalisme atau tindakan perusakan terhadap properti</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran Operational</h3>
                 <p>• Absensi/Ketidakhadiran Tanpa izin (Bolos kerja)</p>
                 <p>• Terlambat berulang tanpa izin dan bukti yang jelas</p>
@@ -418,44 +375,44 @@
                 <p>• Tidak mengikuti SOP Prosedur</p>
                 <p>• Kelalaian yang menyebabkan kerusakan barang (Asset/SKU Item/Consumable/Customer)</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran Keuangan</h3>
                 <p>• Pencurian uang atau barang</p>
                 <p>• Penyalahgunaan diskon, kupon, barang promo</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran Customer</h3>
                 <p>• Perilaku Tidak Sopan terhadap customer</p>
                 <p>• Menyalahgunakan informasi customer</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran SDM</h3>
                 <p>• Pelecehan</p>
                 <p>• Diskriminasi</p>
                 <p>• Pelanggaran Kontrak Kerja</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran IT</h3>
                 <p>• Penyalahgunaan perangkat IT</p>
                 <p>• Merubah posisi aset selain keperluan operasional</p>
                 <p>• Pelanggaran Manipulasi Data</p>
                 <p>• Membocorkan sistem internal (membagikan data penjualan, sistem inventaris ke pihak luar)</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran 5R & K3</h3>
                 <p>• Mengabaikan protokol 5R (Ringkas, Rapi, Resik, Rawat dan Rajin)</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran Etika</h3>
                 <p>• Konflik Kepentingan</p>
                 <p>• Memberi dan/atau Menerima Suap/Gratifikasi</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Pelanggaran Reputasi Perusahaan</h3>
                 <p>• Mencitrakan buruk Perusahaan</p>
                 <p>• Menggunakan seragam/nama Perusahaan untuk tindakan ilegal, pelanggaran norma atau pelanggaran hukum</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <h3>Sanksi atas Pelanggaran (Thorny Stick)</h3>
                 <p>• Mitra yang terbukti melakukan pelanggaran terhadap ketentuan dalam Thorny Stick akan dikenakan sanksi berupa:</p>
                 <p>• Surat Peringatan (SP)</p>
@@ -467,8 +424,8 @@
             </div>
         </div>
         
-        <div id="Bantuan" class="content-section">
-                <div class="card">
+        <div id="bantuan" class="content-section">
+            <div class="card">
                 <span class="badge">Bantuan</span>
                 <h3>Silahkan hubungi SPV masing-masing, jika kamu mengalami kendala dibawah ini:</h3>
                 <p>• Pengajuan perubahan data diri, seperti : Nomer rekening, No HP, Email</p>
@@ -476,7 +433,7 @@
                 <p>• Kendala Komisi/BSC, seperti : Selisih jumlah saat penerimaan, terlambat ditransfer melebihi tanggal yang sudah ditentukan</p>
                 <p>• Kendala Akun Astro Crew, seperti : Auto Cleansing, Kendala login</p>
             </div>
-                <div class="card">
+            <div class="card">
                 <span class="badge">Bantuan</span>
                 <h3>Silahkan hubungi Trainer masing-masing, jika kamu mengalami kendala dibawah ini:</h3>
                 <p>• Surat Pernyataan Komitmen belum dikirim oleh vendor</p>
@@ -497,7 +454,10 @@
         let menuItems = document.querySelectorAll("#menuList li");
         menuItems.forEach(item => item.classList.remove("active"));
 
-        document.getElementById(tabName).classList.add("active");
+        let targetSection = document.getElementById(tabName);
+        if(targetSection) {
+            targetSection.classList.add("active");
+        }
         evt.currentTarget.classList.add("active");
     }
 
@@ -517,7 +477,6 @@
         }
     }
 
-    // --- LOGIKA UTAMA KALKULATOR TANGGAL & UANG ---
     function hitungKomisiDanJadwal() {
         let joinDateVal = document.getElementById('joinDate').value;
         let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
@@ -528,14 +487,12 @@
             return;
         }
 
-        // 1. Hitung Uang Komisi
         let totalUang = shift * rate;
         let formatRupiah = new Intl.NumberFormat('id-ID', {
             style: 'currency', currency: 'IDR', minimumFractionDigits: 0
         }).format(totalUang);
         document.getElementById('totalKomisiResult').innerText = formatRupiah;
 
-        // 2. Logika Tanggal Pembayaran (Aman dari Bug Timezone)
         let parts = joinDateVal.split('-');
         let tahunJoin = parseInt(parts[0], 10);
         let bulanJoin = parseInt(parts[1], 10) - 1; 
@@ -545,7 +502,6 @@
         let targetBulan = bulanJoin;
         let targetTahun = tahunJoin;
 
-        // --- KONDISI 1: Periode 25 (Bulan Lalu) sampai 10 (Bulan Ini) ---
         if (tanggalJoin >= 25) {
             tanggalBayar = 19;
             targetBulan = bulanJoin + 1; 
@@ -554,21 +510,17 @@
             tanggalBayar = 19;
             targetBulan = bulanJoin;     
         }
-        // --- KONDISI 2: Periode 11 sampai 24 (Bulan Ini) ---
         else if (tanggalJoin >= 11 && tanggalJoin <= 24) {
             tanggalBayar = 5;
             targetBulan = bulanJoin + 1; 
         }
 
-        // Buat objek tanggal (JavaScript otomatis mengoreksi jika ganti tahun)
         let gajianDate = new Date(targetTahun, targetBulan, tanggalBayar);
-
-        // Format tanggal ke Bahasa Indonesia (Hari Bulan Tahun)
         let opsiFormat = { day: '2-digit', month: 'long', year: 'numeric' };
         let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
 
         document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
-    } // Kurung kurawal penutup fungsi utama
+    }
 </script>
 </body>
 </html>
