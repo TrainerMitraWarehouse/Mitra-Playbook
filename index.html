@@ -17,7 +17,7 @@
         
         /* --- SIDEBAR KIRI --- */
         nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; top: 0; left: 0; }
-        nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; margin-top: 10px; }
+        nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; }
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
         nav ul { list-style: none; padding: 0; margin: 0; }
         nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
@@ -25,45 +25,33 @@
         nav li.active { background: var(--primary); color: white; }
 
         /* --- KONTEN UTAMA --- */
-        main { margin-left: 280px; padding: 0 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
+        main { margin-left: 280px; padding: 30px 40px; width: calc(100% - 280px); box-sizing: border-box; }
 
-        /* --- NAVBAR HEADER ATAS --- */
-        .ut-header-wrapper {
-            margin-left: -40px;
-            margin-right: -40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        /* --- SIMPLE CLEAN NAVBAR ATAS --- */
+        .simple-navbar {
             background: var(--white);
-        }
-
-        .ut-main-navbar {
-            background: var(--white);
-            padding: 20px 40px;
+            padding: 20px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
-        .ut-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; color: var(--primary); cursor: pointer; }
-        .ut-brand-logo { background: var(--primary); color: white; padding: 6px 10px; border-radius: 8px; font-size: 1rem; }
-        .ut-nav-links { display: flex; align-items: center; gap: 25px; list-style: none; margin: 0; padding: 0; }
-        .ut-link-item { font-weight: 600; color: var(--text); font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 4px; }
-        .ut-link-item:hover { color: var(--primary); }
-        .ut-link-item::after { content: '⌃'; transform: rotate(180deg); display: inline-block; font-size: 0.65rem; margin-top: -2px; font-weight: bold; }
-
+        .nav-brand-title { font-weight: 800; font-size: 1.3rem; color: var(--primary); margin: 0; }
+        
         .btn-myut-layout {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
-            padding: 9px 24px;
-            border-radius: 12px;
+            padding: 10px 24px;
+            border-radius: 10px;
             font-weight: 700;
             font-size: 0.95rem;
             cursor: pointer;
             transition: 0.2s;
-            outline: none;
         }
-        .btn-myut-layout:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(3, 57, 128, 0.2); }
+        .btn-myut-layout:hover { background: var(--primary); color: var(--white); }
 
         /* --- BANNER HIGHLIGHT --- */
         .highlight-container {
@@ -72,17 +60,15 @@
             border-radius: 15px;
             overflow: hidden;
             margin-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
             border: 1px solid var(--border);
         }
-        .banner-image-wrapper { width: 100%; height: 180px; overflow: hidden; position: relative; }
+        .banner-image-wrapper { width: 100%; height: 180px; overflow: hidden; }
         .banner-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .running-text-wrapper { background: var(--primary); color: white; padding: 10px 0; white-space: nowrap; overflow: hidden; position: relative; display: flex; align-items: center; }
+        .running-text-wrapper { background: var(--primary); color: white; padding: 10px 0; white-space: nowrap; overflow: hidden; display: flex; align-items: center; }
         .running-text { display: inline-block; padding-left: 100%; font-weight: 700; font-size: 1.1rem; animation: marquee 15s linear infinite; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-        .running-text-wrapper:hover .running-text { animation-play-state: paused; }
 
-        /* --- ELEMEN KONTEN SECTIONS --- */
+        /* --- CARDS KONTEN --- */
         .content-section { display: none; } 
         .content-section.active { display: block; } 
         .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
@@ -91,16 +77,14 @@
         p { line-height: 1.6; color: #475569; }
         .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
 
-        /* --- LOGIKA KALKULATOR KOMISI --- */
+        /* --- KALKULATOR --- */
         .calculator-group { margin-bottom: 15px; }
-        .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
-        .calculator-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem; }
-        .calculator-group input:focus { border-color: var(--primary); }
-        .btn-hitung { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .btn-hitung:hover { background: #033980; opacity: 0.9; }
+        .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .calculator-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; }
+        .btn-hitung { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
         .result-container { margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
         .result-box { flex: 1; min-width: 200px; padding: 15px; background: var(--white); border-left: 5px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); border-left-width: 5px; }
-        .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
+        .result-box h4 { margin: 0 0 5px 0; }
         .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
     </style>
 </head>
@@ -110,4 +94,58 @@
         <h2>Mitra Playbook</h2>
         <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
         <ul id="menuList">
-            <li class="active" onclick="openTab(event, '
+            <li class="active" onclick="openTab(event, 'lokasi-warehouse')">📍 Lokasi Warehouse</li>
+            <li onclick="openTab(event, 'seragam-atribut')">👕 Seragam & Atribut</li>
+            <li onclick="openTab(event, 'absensi')">🗓️ Absensi</li>
+            <li onclick="openTab(event, 'pembayaran')">💵 Skema Pembayaran</li>
+            <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
+            <li onclick="openTab(event, 'bpjs')">🪪 BPJS</li>
+            <li onclick="openTab(event, 'astro-get-astro')">🧑‍🧒‍🧒 Astro Get Astro</li>
+            <li onclick="openTab(event, 'izin-berbayar')">📩 Izin Berbayar</li>
+            <li onclick="openTab(event, 'jenis-pelanggaran')">🚫 Jenis-Jenis Pelanggaran</li>
+            <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="simple-navbar">
+            <h1 class="nav-brand-title">🚀 MitraHub</h1>
+            <button class="btn-myut-layout" onclick="bukaLinkAiEksternal()">Informasi Mitra</button>
+        </div>
+
+        <div class="highlight-container">
+            <div class="banner-image-wrapper">
+                <img src="coverbanner.png" alt="Pusat Informasi Mitra" class="content-image">
+            </div>
+            <div class="running-text-wrapper">
+                <div class="running-text">
+                    📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |      🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
+                </div>
+            </div>
+        </div>
+
+        <div id="lokasi-warehouse" class="content-section active">
+            <div style="margin-top: 25px;">
+                <a href="http://maps.google.com" target="_blank" style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block;">📌 Lokasi Warehouse Dry Cibitung</a>
+            </div>
+            <div class="card">
+                <span class="badge">Lokasi Warehouse</span>
+                <h3>Warehouse Dry Cibitung (CBT)</h3>
+                <p>Jl. Kp. Tangsi Jatiwangi No.74, Jatiwangi, Kec. Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530</p>
+                <img src="CBT.png" alt="CBT" class="content-image">
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <a href="http://maps.google.com" target="_blank" style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block;">📌 Lokasi Warehouse Dry Sentul</a>
+            </div>
+            <div class="card">
+                <span class="badge">Lokasi Warehouse</span>
+                <h3>Warehouse Dry Sentul (STL)</h3>
+                <p>Jl. Olympic Raya No.A12, Leuwinutug, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16810</p>
+                <img src="STL.png" alt="STL" class="content-image">
+            </div>
+
+            <div style="margin-top: 25px;">
+                <a href="http://maps.google.com" target="_blank" style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block;">📌 Lokasi Warehouse Fresh Cibinong</a>
+            </div>
+            <div class="card">
