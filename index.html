@@ -11,11 +11,12 @@
             --text: #1e293b;
             --border: #bce2fd;
             --white: #ffffff;
+            --gray-light: #f8fafc;
         }
         
         body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
         
-        /* Sidebar */
+        /* Sidebar Kiri Tetap Dipertahankan */
         nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
         nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; }
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
@@ -24,8 +25,100 @@
         nav li:hover { background: #bce2fd; } 
         nav li.active { background: var(--primary); color: white; }
 
-        /* Main Content */
-        main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); box-sizing: border-box; }
+        /* Main Content Adjustment */
+        main { margin-left: 280px; padding: 0 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
+
+        /* --- NAVBAR BARU ALA UT (image_350287.png) --- */
+        .ut-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--white);
+            padding: 15px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            margin-left: -40px;
+            margin-right: -40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        /* Bagian Kiri: Brand/Logo */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        .navbar-brand .logo-icon {
+            background: var(--primary);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        /* Bagian Tengah: Menu Navigasi Utama Horizontal */
+        .navbar-menu-center {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-item {
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .navbar-item:hover {
+            color: var(--primary);
+        }
+        /* Tanda panah dropdown kecil di sebelah teks menu */
+        .navbar-item::after {
+            content: '⌃';
+            transform: rotate(180deg);
+            display: inline-block;
+            font-size: 0.7rem;
+            margin-top: -2px;
+        }
+
+        /* Bagian Kanan: Tombol Berbingkai Persis MyUT */
+        .navbar-action-right {
+            display: flex;
+            align-items: center;
+        }
+        .btn-myut-style {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-myut-style:hover, .btn-myut-style.active {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(3, 57, 128, 0.2);
+        }
+
 
         /* --- BANNER HIGHLIGHT --- */
         .highlight-container {
@@ -33,7 +126,7 @@
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
             border: 1px solid var(--border);
         }
@@ -79,51 +172,6 @@
             animation-play-state: paused;
         }
 
-        /* --- MENU AI TOOLS BAR DI ATAS KONTEN --- */
-        .ai-tools-bar {
-            background: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        .ai-tools-bar h4 {
-            margin: 0 0 10px 0;
-            color: var(--primary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .ai-tabs-container {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .ai-tab-btn {
-            background: #f1f5f9;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ai-tab-btn:hover {
-            background: #e2e8f0;
-            color: var(--primary);
-        }
-        .ai-tab-btn.active {
-            background: #e0f2fe;
-            color: #0369a1;
-            border-color: #7dd3fc;
-        }
-
         /* Content Sections */
         .content-section { display: none; } 
         .content-section.active { display: block; } 
@@ -145,7 +193,7 @@
         .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
         .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
 
-        /* Iframe Frame AI */
+        /* Iframe Frame */
         .ai-iframe-wrapper {
             width: 100%;
             height: 650px;
@@ -182,6 +230,25 @@
     </nav>
 
     <main>
+        <header class="ut-navbar">
+            <div class="navbar-brand">
+                <span class="logo-icon">🚀</span>
+                <span>MitraHub Digital</span>
+            </div>
+            
+            <ul class="navbar-menu-center">
+                <li class="navbar-item">Profil</li>
+                <li class="navbar-item">Akademik</li>
+                <li class="navbar-item">Layanan</li>
+                <li class="navbar-item">Riset</li>
+                <li class="navbar-item">Kontak</li>
+            </ul>
+
+            <div class="navbar-action-right">
+                <button class="btn-myut-style" id="btnInfoMitra" onclick="openAiTool(event, 'ai-studio-apps')">Informasi Mitra</button>
+            </div>
+        </header>
+
         <div class="highlight-container">
             <div class="banner-image-wrapper">
                 <img src="coverbanner.png" alt="Pusat Informasi Mitra" class="content-image">
@@ -191,13 +258,6 @@
                     📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |      🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
                 </div>
             </div>
-        </div>
-
-        <div class="ai-tools-bar">
-            <h4>🤖 Ekosistem AI Tools Mitra</h4>
-            <div class="ai-tabs-container">
-                <button class="ai-tab-btn" onclick="openAiTool(event, 'ai-studio-apps')">⚡ AI Studio App</button>
-                </div>
         </div>
 
         <div id="ai-studio-apps" class="content-section">
@@ -512,11 +572,9 @@
     </main>
                     
 <script>
-    // Fungsi Tab Konten Utama (Navigasi Kiri)
     function openTab(evt, tabName) {
-        // Matikan tab AI yang mungkin sedang aktif
-        let aiButtons = document.querySelectorAll(".ai-tab-btn");
-        aiButtons.forEach(btn => btn.classList.remove("active"));
+        // Hilangkan warna biru aktif pada tombol Informasi Mitra di kanan atas
+        document.getElementById("btnInfoMitra").classList.remove("active");
 
         let sections = document.getElementsByClassName("content-section");
         for (let i = 0; i < sections.length; i++) {
@@ -533,27 +591,24 @@
         evt.currentTarget.classList.add("active");
     }
 
-    // Fungsi Tab Khusus AI Tools (Navigasi Atas)
     function openAiTool(evt, aiTabName) {
-        // Nonaktifkan semua menu di sidebar kiri
+        // Matikan warna aktif di menu sidebar kiri
         let menuItems = document.querySelectorAll("#menuList li");
         menuItems.forEach(item => item.classList.remove("active"));
 
-        // Sembunyikan seluruh section konten
+        // Sembunyikan semua kontainer playbook biasa
         let sections = document.getElementsByClassName("content-section");
         for (let i = 0; i < sections.length; i++) {
             sections[i].classList.remove("active");
         }
 
-        // Reset status tombol AI
-        let aiButtons = document.querySelectorAll(".ai-tab-btn");
-        aiButtons.forEach(btn => btn.classList.remove("active"));
-
-        // Aktifkan panel iframe AI yang dipilih
+        // Aktifkan panel iframe link AI temanmu
         let targetAiSection = document.getElementById(aiTabName);
         if(targetAiSection) {
             targetAiSection.classList.add("active");
         }
+        
+        // Buat tombol berbingkai biru kanan atas menjadi mode aktif penuh (biru solid)
         evt.currentTarget.classList.add("active");
     }
 
