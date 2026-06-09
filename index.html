@@ -638,38 +638,28 @@
         let nohp = document.getElementById('loginNoHp').value;
         let staffid = document.getElementById('loginStaffId').value;
         let btn = document.getElementById('btnLogin');
-    
         btn.innerText = "Memverifikasi...";
-    
-        fetch(WEB_APP_URL, { 
-        method: "POST", 
-        // Mode 'no-cors' terkadang membuat status tidak terbaca di fetch biasa
-        // Jika tetap tidak memproses, gunakan mode: 'cors' dan pastikan Apps Script mengembalikan header akses
-        body: JSON.stringify({ nohp: nohp, staffid: staffid }) 
-        })
+        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
         .then(res => res.json())
         .then(data => {
-        if(data.status === "sukses") {
-        document.getElementById('loginScreen').style.display = "none";
-        document.getElementById('appContainer').style.display = "flex";
-        sessionStorage.setItem("mitraAktivated", "true");
-        } else {
-        alert("Nomor HP atau Staff ID tidak terdaftar!");
-        btn.innerText = "Masuk Sistem";
-        }
-        })
-        .catch(err => {
-        console.error(err);
-        alert("Gagal terhubung ke server login. Pastikan sudah di-deploy.");
-        btn.innerText = "Masuk Sistem";
+            if(data.status === "sukses") {
+                document.getElementById('loginScreen').style.display = "none";
+                document.getElementById('appContainer').style.display = "flex";
+                sessionStorage.setItem("mitraAktivated", "true");
+            } else { alert("Data salah!"); btn.innerText = "Login"; }
         });
-        }
-        window.addEventListener('DOMContentLoaded', () => {
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
         if(sessionStorage.getItem("mitraAktivated") === "true") {
-        document.getElementById('loginScreen').style.display = "none";
-        document.getElementById('appContainer').style.display = "flex";
+            document.getElementById('loginScreen').style.display = "none";
+            document.getElementById('appContainer').style.display = "flex";
         }
-        });
-        </script>
-    </body>
+    });
+
+    function openTab(evt, tabName) { /* ... isi fungsi aslimu ... */ }
+    function searchGlobal() { /* ... isi fungsi aslimu ... */ }
+    function hitungKomisiDanJadwal() { /* ... isi fungsi aslimu ... */ }
+</script>
+</body>
 </html>
