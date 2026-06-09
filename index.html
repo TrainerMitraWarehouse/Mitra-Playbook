@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitra Playbook</title>
     <style>
+        /* --- Tambahan CSS Login --- */
+#loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #64b1fa; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+.login-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 350px; text-align: center; }
+.input-field { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #bce2fd; border-radius: 8px; box-sizing: border-box; }
+.btn-login { width: 100%; background: #033980; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
         :root {
             --primary: #033980;
             --bg: #64b1fa;
@@ -147,6 +153,15 @@
     </style>
 </head>
 <body>
+    <div id="loginScreen">
+    <div class="login-card">
+        <h2 style="color: #033980;">Login Mitra Aktif</h2>
+        <input type="text" id="loginNoHp" class="input-field" placeholder="Nomor HP">
+        <input type="password" id="loginStaffId" class="input-field" placeholder="Staff ID">
+        <button onclick="prosesLogin()" id="btnLogin" class="btn-login">Masuk Sistem</button>
+        <p id="pesanError" style="color: red; display: none;"></p>
+    </div>
+</div>
 
     <nav>
         <h2>Mitra Playbook</h2>
@@ -582,6 +597,38 @@
         let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
 
         document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
+        
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrc9Ax0hNiLqjnBwhf1mlbwPqcMqigy7yA89Z99rAmaTICqjI0TyiSCG5b5k-z93Pw/exec";
+
+function prosesLogin() {
+    let nohp = document.getElementById('loginNoHp').value;
+    let staffid = document.getElementById('loginStaffId').value;
+    let btn = document.getElementById('btnLogin');
+    btn.innerText = "Memverifikasi...";
+    
+    fetch(WEB_APP_URL, { 
+        method: "POST", 
+        mode: "no-cors", 
+        body: JSON.stringify({ nohp: nohp, staffid: staffid }) 
+    })
+    .then(() => {
+        document.getElementById('loginScreen').style.display = "none";
+        document.getElementById('appContainer').style.display = "flex";
+        sessionStorage.setItem("mitraAktivated", "true");
+    })
+    .catch(() => {
+        document.getElementById('pesanError').innerText = "Data tidak ditemukan!";
+        document.getElementById('pesanError').style.display = "block";
+        btn.innerText = "Masuk Sistem";
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    if(sessionStorage.getItem("mitraAktivated") === "true") {
+        document.getElementById('loginScreen').style.display = "none";
+        document.getElementById('appContainer').style.display = "flex";
+    }
+});
     }
 </script>
 </body>
