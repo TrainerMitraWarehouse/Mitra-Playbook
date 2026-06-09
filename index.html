@@ -27,25 +27,52 @@
         /* --- KONTEN UTAMA --- */
         main { margin-left: 280px; padding: 0 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
 
-        /* --- NAVBAR HEADER ATAS (BARIS ATAS DIHAPUS) --- */
+        /* --- NAVBAR HEADER ATAS --- */
         .ut-header-wrapper {
             margin-left: -40px;
             margin-right: -40px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            background: var(--white); /* Memaksa background pembungkus menjadi putih bersih */
         }
 
         /* Navbar Utama Putih Clean */
         .ut-main-navbar {
             background: var(--white);
-            padding: 20px 40px; /* Ditambah sedikit padding vertikal biar lebih elegan */
+            padding: 20px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
         }
         .ut-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; color: var(--primary); cursor: pointer; }
         .ut-brand-logo { background: var(--primary); color: white; padding: 6px 10px; border-radius: 8px; font-size: 1rem; }
         .ut-nav-links { display: flex; align-items: center; gap: 25px; list-style: none; margin: 0; padding: 0; }
         .ut-link-item { font-weight: 600; color: var(--text); font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 4px; }
         .ut-link-item:hover { color: var(--primary); }
-        .ut-link-item::after { content: '⌃'; transform: rotate(180deg); display: inline-block; font-size: 0.65rem; margin-top: -2px; font-
+        .ut-link-item::after { content: '⌃'; transform: rotate(180deg); display: inline-block; font-size: 0.65rem; margin-top: -2px; font-weight: bold; }
+
+        /* Tombol Bingkai Khas MyUT */
+        .btn-myut-layout {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 9px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            outline: none;
+        }
+        .btn-myut-layout:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(3, 57, 128, 0.2); }
+
+        /* --- BANNER HIGHLIGHT --- */
+        .highlight-container {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(153
+                                        
