@@ -149,18 +149,18 @@
     </style>
 </head>
 <body>
-    <<div id="loginScreen">
+    
+    <div id="loginScreen">
         <div class="login-card">
-            <h2 style="color: #033980;">Login Mitra Aktif</h2>
+            <h2>Login Mitra Aktif</h2>
             <input type="text" id="loginNoHp" class="input-field" placeholder="Nomor HP">
             <input type="password" id="loginStaffId" class="input-field" placeholder="Staff ID">
             <button onclick="prosesLogin()" id="btnLogin" class="btn-login">Login</button>
-            <p id="pesanError" style="color: red; display: none;"></p>
         </div>
     </div>
+
     <div id="appContainer" style="display: none; width: 100%;">
         <nav>
-            <h2>Mitra Playbook</h2>
             </nav>
         <main>
             </main>
@@ -543,7 +543,7 @@
         </div>
     </main>
                     
-<script {id:"finalScript"}>
+<script>
     // Fungsi Tab Konten untuk Mengarahkan ke Gemini Link Temanmu di Tab Baru browser
     function bukaLinkAiEksternal() {
         window.open("https://ai.studio/apps/54f2a96d-cf2f-46e7-be00-91bf5b2dec47", "_blank");
@@ -633,34 +633,36 @@
         document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
         }
         
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyFlMgaUkKkyTRrdvQGvtFGup3BZTjlEHfVPsY1D1j_bgMzkHalHC9PzO_UCAdsgi4/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyFlMgaUkKkyTRrdvQGvtFGup3BZTjlEHfVPsY1D1j_bgMzkHalHC9PzO_UCAdsgi4/exec";
 
-    function prosesLogin() {
-        let nohp = document.getElementById('loginNoHp').value;
-        let staffid = document.getElementById('loginStaffId').value;
-        let btn = document.getElementById('btnLogin');
-        btn.innerText = "Memverifikasi...";
-        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
-        .then(res => res.json())
-        .then(data => {
-            if(data.status === "sukses") {
+        function prosesLogin() {
+            let nohp = document.getElementById('loginNoHp').value;
+            let staffid = document.getElementById('loginStaffId').value;
+            let btn = document.getElementById('btnLogin');
+            btn.innerText = "Memverifikasi...";
+            
+            fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "sukses") {
+                    document.getElementById('loginScreen').style.display = "none";
+                    document.getElementById('appContainer').style.display = "flex";
+                    sessionStorage.setItem("mitraAktivated", "true");
+                } else { alert("Data salah!"); btn.innerText = "Login"; }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if(sessionStorage.getItem("mitraAktivated") === "true") {
                 document.getElementById('loginScreen').style.display = "none";
                 document.getElementById('appContainer').style.display = "flex";
-                sessionStorage.setItem("mitraAktivated", "true");
-            } else { alert("Data salah!"); btn.innerText = "Login"; }
+            }
         });
-    }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        if(sessionStorage.getItem("mitraAktivated") === "true") {
-            document.getElementById('loginScreen').style.display = "none";
-            document.getElementById('appContainer').style.display = "flex";
-        }
-    });
-
-    function openTab(evt, tabName) { /* ... isi fungsi aslimu ... */ }
-    function searchGlobal() { /* ... isi fungsi aslimu ... */ }
-    function hitungKomisiDanJadwal() { /* ... isi fungsi aslimu ... */ }
-</script>
+        // SEMUA FUNGSI ASLI ANDA DI BAWAH INI
+        function openTab(evt, tabName) { /* ... */ }
+        function searchGlobal() { /* ... */ }
+        function hitungKomisiDanJadwal() { /* ... */ }
+    </script>
 </body>
 </html>
