@@ -15,21 +15,19 @@
         
         body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
         
-        /* Sidebar Navigasi Kiri - Warna Asli Sesuai GitHub */
-        nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; top: 0; }
+        /* --- SIDEBAR KIRI --- */
+        nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; top: 0; left: 0; }
         nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; margin-top: 10px; }
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
-        nav ul { list-style: none; padding: 0; }
+        nav ul { list-style: none; padding: 0; margin: 0; }
         nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
         nav li:hover { background: #bce2fd; } 
         nav li.active { background: var(--primary); color: white; }
 
-        /* Main Content Area */
+        /* --- KONTEN UTAMA --- */
         main { margin-left: 280px; padding: 0 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
 
-        /* =======================================================
-           🚀 UT-STYLE PREMIUM HEADER DESIGN (WARNA TETAP ASLI)
-           ======================================================= */
+        /* --- NAVBAR HEADER ATAS --- */
         .ut-header-wrapper {
             margin-left: -40px;
             margin-right: -40px;
@@ -37,7 +35,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
         }
 
-        /* Layer 1: Bar Atas */
+        /* Top Bar */
         .ut-top-yellow-bar {
             background-color: var(--white);
             padding: 10px 40px;
@@ -49,16 +47,8 @@
             color: var(--text);
             border-bottom: 1px solid var(--border);
         }
-        .ut-top-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ut-top-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+        .ut-top-left { display: flex; align-items: center; gap: 8px; }
+        .ut-top-right { display: flex; align-items: center; gap: 20px; }
         .ut-mini-search {
             background: var(--white);
             border: 1px solid var(--border);
@@ -69,17 +59,10 @@
             font-size: 0.8rem;
             transition: 0.2s;
         }
-        .ut-mini-search:focus {
-            border-color: var(--primary);
-            width: 220px;
-        }
-        .ut-social-icons {
-            display: flex;
-            gap: 10px;
-            font-size: 1rem;
-        }
+        .ut-mini-search:focus { border-color: var(--primary); width: 220px; }
+        .ut-social-icons { display: flex; gap: 10px; font-size: 1rem; }
 
-        /* Layer 2: Bar Utama (Main Navbar Putih) */
+        /* Main Bar */
         .ut-main-navbar {
             background: var(--white);
             padding: 15px 40px;
@@ -87,29 +70,48 @@
             align-items: center;
             justify-content: space-between;
         }
-        .ut-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 1.25rem;
+        .ut-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; color: var(--primary); cursor: pointer; }
+        .ut-brand-logo { background: var(--primary); color: white; padding: 6px 10px; border-radius: 8px; font-size: 1rem; }
+        .ut-nav-links { display: flex; align-items: center; gap: 25px; list-style: none; margin: 0; padding: 0; }
+        .ut-link-item { font-weight: 600; color: var(--text); font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 4px; }
+        .ut-link-item:hover { color: var(--primary); }
+        .ut-link-item::after { content: '⌃'; transform: rotate(180deg); display: inline-block; font-size: 0.65rem; margin-top: -2px; font-weight: bold; }
+
+        /* Tombol Bingkai Khas MyUT */
+        .btn-myut-layout {
+            background: transparent;
             color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 9px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
             cursor: pointer;
+            transition: 0.2s;
+            outline: none;
         }
-        .ut-brand-logo {
-            background: var(--primary);
-            color: white;
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 1rem;
+        .btn-myut-layout:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(3, 57, 128, 0.2); }
+
+        /* --- BANNER HIGHLIGHT --- */
+        .highlight-container {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
+            border: 1px solid var(--border);
         }
-        .ut-nav-links {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .ut-link-item {
-            font-
+        .banner-image-wrapper { width: 100%; height: 180px; overflow: hidden; position: relative; }
+        .banner-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .running-text-wrapper { background: var(--primary); color: white; padding: 10px 0; white-space: nowrap; overflow: hidden; position: relative; display: flex; align-items: center; }
+        .running-text { display: inline-block; padding-left: 100%; font-weight: 700; font-size: 1.1rem; animation: marquee 15s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+        .running-text-wrapper:hover .running-text { animation-play-state: paused; }
+
+        /* --- ELEMEN KONTEN SECTIONS --- */
+        .content-section { display: none; } 
+        .content-section.active { display: block; } 
+        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .badge { background: #bce2fd; color: var(--primary); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        h3 { color: var(--
