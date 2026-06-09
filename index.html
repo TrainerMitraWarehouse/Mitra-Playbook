@@ -153,15 +153,49 @@
 </head>
 <body>
     <div id="loginScreen">
-    <div class="login-card">
-        <h2 style="color: #033980;">Login Mitra Aktif</h2>
-        <input type="text" id="Nomor HP" class="input-field" placeholder="Nomor HP">
-        <input type="password" id="Staff ID" class="input-field" placeholder="Staff ID">
-        <button onclick="Login()" id="btnLogin" class="btn-login">Login</button>
-        <p id="pesanError" style="color: red; display: none;"></p>
+        <div class="login-card">
+            <h2 style="color: #033980;">Login Mitra Aktif</h2>
+            <input type="text" id="loginNoHp" class="input-field" placeholder="Nomor HP">
+            <input type="password" id="loginStaffId" class="input-field" placeholder="Staff ID">
+            <button onclick="prosesLogin()" id="btnLogin" class="btn-login">Login</button>
+            <p id="pesanError" style="color: red; display: none;"></p>
+        </div>
     </div>
-</div>
 
+    <div id="appContainer" style="display: none; width: 100%;">
+        </div>
+    
+<script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyFlMgaUkKkyTRrdvQGvtFGup3BZTjlEHfVPsY1D1j_bgMzkHalHC9PzO_UCAdsgi4/exec";
+
+    // FUNGSI LOGIN (TIDAK LAGI TERPERANGKAP)
+    function prosesLogin() {
+        let nohp = document.getElementById('loginNoHp').value;
+        let staffid = document.getElementById('loginStaffId').value;
+        let btn = document.getElementById('btnLogin');
+        btn.innerText = "Memverifikasi...";
+        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === "sukses") {
+                document.getElementById('loginScreen').style.display = "none";
+                document.getElementById('appContainer').style.display = "flex";
+                sessionStorage.setItem("mitraAktivated", "true");
+            } else { alert("Data salah!"); btn.innerText = "Login"; }
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if(sessionStorage.getItem("mitraAktivated") === "true") {
+            document.getElementById('loginScreen').style.display = "none";
+            document.getElementById('appContainer').style.display = "flex";
+        }
+    });
+
+    // FUNGSI ASLIMU (PASTE DI BAWAH SINI, PASTIKAN TIDAK TERBUNGKUS OLEH KURUNG LAIN)
+    function openTab(evt, tabName) { ... }
+    function searchGlobal() { ... }
+    function hitungKomisiDanJadwal() { ... }
     <nav>
         <h2>Mitra Playbook</h2>
         <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
