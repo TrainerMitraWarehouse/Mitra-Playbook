@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitra Playbook</title>
     <style>
-        /* CSS Login - Tetap */
+        /* [CSS Anda Tetap Sama] */
         #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #64b1fa; z-index: 9999; display: flex; align-items: center; justify-content: center; }
         .login-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 350px; text-align: center; }
         .input-field { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #bce2fd; border-radius: 8px; box-sizing: border-box; }
         .btn-login { width: 100%; background: #033980; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        
-        /* CSS Asli - Tetap (Sama seperti punya Anda) */
         :root { --primary: #033980; --bg: #64b1fa; --text: #1e293b; --border: #bce2fd; --white: #ffffff; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
         nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
         main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); box-sizing: border-box; }
+        .content-section { display: none; } .content-section.active { display: block; }
             
         /* Sidebar */
         nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
@@ -161,30 +160,16 @@
 
     <div id="appContainer" style="display: none; width: 100%;">
         <nav>
-            </nav>
+            <h2>Mitra Playbook</h2>
+            <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
+            <ul id="menuList">
+                <li class="active" onclick="openTab(event, 'lokasi-warehouse')">📍 Lokasi Warehouse</li>
+                </ul>
+        </nav>
         <main>
             </main>
     </div>
-    
 <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyFlMgaUkKkyTRrdvQGvtFGup3BZTjlEHfVPsY1D1j_bgMzkHalHC9PzO_UCAdsgi4/exec";
-
-    // FUNGSI LOGIN (TIDAK LAGI TERPERANGKAP)
-    function prosesLogin() {
-        let nohp = document.getElementById('loginNoHp').value;
-        let staffid = document.getElementById('loginStaffId').value;
-        let btn = document.getElementById('btnLogin');
-        btn.innerText = "Memverifikasi...";
-        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
-        .then(res => res.json())
-        .then(data => {
-            if(data.status === "sukses") {
-                document.getElementById('loginScreen').style.display = "none";
-                document.getElementById('appContainer').style.display = "flex";
-                sessionStorage.setItem("mitraAktivated", "true");
-            } else { alert("Data salah!"); btn.innerText = "Login"; }
-        });
-    }
 
     window.addEventListener('DOMContentLoaded', () => {
         if(sessionStorage.getItem("mitraAktivated") === "true") {
@@ -633,36 +618,54 @@
         document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
         }
         
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyFlMgaUkKkyTRrdvQGvtFGup3BZTjlEHfVPsY1D1j_bgMzkHalHC9PzO_UCAdsgi4/exec";
+        <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyFlMgaUkKkyTRrdvQGvtFGup3BZTjlEHfVPsY1D1j_bgMzkHalHC9PzO_UCAdsgi4/exec";
 
-        function prosesLogin() {
-            let nohp = document.getElementById('loginNoHp').value;
-            let staffid = document.getElementById('loginStaffId').value;
-            let btn = document.getElementById('btnLogin');
-            btn.innerText = "Memverifikasi...";
-            
-            fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
-            .then(res => res.json())
-            .then(data => {
-                if(data.status === "sukses") {
-                    document.getElementById('loginScreen').style.display = "none";
-                    document.getElementById('appContainer').style.display = "flex";
-                    sessionStorage.setItem("mitraAktivated", "true");
-                } else { alert("Data salah!"); btn.innerText = "Login"; }
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            if(sessionStorage.getItem("mitraAktivated") === "true") {
+    function prosesLogin() {
+        let nohp = document.getElementById('loginNoHp').value;
+        let staffid = document.getElementById('loginStaffId').value;
+        let btn = document.getElementById('btnLogin');
+        btn.innerText = "Memverifikasi...";
+        
+        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify({ nohp: nohp, staffid: staffid }) })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === "sukses") {
                 document.getElementById('loginScreen').style.display = "none";
                 document.getElementById('appContainer').style.display = "flex";
-            }
+                sessionStorage.setItem("mitraAktivated", "true");
+            } else { alert("Data salah!"); btn.innerText = "Login"; }
         });
+    }
 
-        // SEMUA FUNGSI ASLI ANDA DI BAWAH INI
-        function openTab(evt, tabName) { /* ... */ }
-        function searchGlobal() { /* ... */ }
-        function hitungKomisiDanJadwal() { /* ... */ }
-    </script>
+    window.addEventListener('DOMContentLoaded', () => {
+        if(sessionStorage.getItem("mitraAktivated") === "true") {
+            document.getElementById('loginScreen').style.display = "none";
+            document.getElementById('appContainer').style.display = "flex";
+        }
+    });
+
+    // Fungsi Utama
+    function openTab(evt, tabName) {
+        let sections = document.getElementsByClassName("content-section");
+        for (let i = 0; i < sections.length; i++) sections[i].classList.remove("active");
+        let menuItems = document.querySelectorAll("#menuList li");
+        menuItems.forEach(item => item.classList.remove("active"));
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    function searchGlobal() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.getElementsByClassName('card');
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].style.display = cards[i].innerText.toLowerCase().includes(input) ? "block" : "none";
+        }
+    }
+
+    function hitungKomisiDanJadwal() {
+        // [PASTE LOGIKA HITUNG KOMISI ANDA DI SINI]
+    }
+</script>
 </body>
 </html>
