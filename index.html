@@ -25,55 +25,32 @@
         nav li.active { background: var(--primary); color: white; }
 
         /* --- KONTEN UTAMA --- */
-        main { margin-left: 280px; padding: 20px 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
+        main { margin-left: 280px; padding: 0 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
 
         /* --- NAVBAR HEADER ATAS --- */
         .ut-header-wrapper {
+            margin-left: -40px;
+            margin-right: -40px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            width: 100%;
-        }
-
-        /* Top Bar */
-        .ut-top-yellow-bar {
-            background-color: var(--white);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text);
-            border-bottom: 1px solid var(--border);
-            border-radius: 12px 12px 0 0;
-        }
-        .ut-top-left { display: flex; align-items: center; gap: 8px; }
-        .ut-top-right { display: flex; align-items: center; gap: 20px; }
-        .ut-mini-search {
             background: var(--white);
-            border: 1px solid var(--border);
-            padding: 6px 15px;
-            border-radius: 20px;
-            width: 150px;
-            outline: none;
-            font-size: 0.8rem;
         }
-        .ut-social-icons { display: flex; gap: 10px; font-size: 1rem; }
 
-        /* Main Bar */
+        /* Navbar Utama Putih Bersih */
         .ut-main-navbar {
             background: var(--white);
-            padding: 15px 20px;
+            padding: 20px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-radius: 0 0 12px 12px;
+            border-bottom: 1px solid #e2e8f0;
         }
-        .ut-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; color: var(--primary); }
+        .ut-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; color: var(--primary); cursor: pointer; }
         .ut-brand-logo { background: var(--primary); color: white; padding: 6px 10px; border-radius: 8px; font-size: 1rem; }
-        .ut-nav-links { display: flex; align-items: center; gap: 20px; list-style: none; margin: 0; padding: 0; }
-        .ut-link-item { font-weight: 600; color: var(--text); font-size: 0.95rem; cursor: pointer; }
+        .ut-nav-links { display: flex; align-items: center; gap: 25px; list-style: none; margin: 0; padding: 0; }
+        .ut-link-item { font-weight: 600; color: var(--text); font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 4px; }
         .ut-link-item:hover { color: var(--primary); }
+        .ut-link-item::after { content: '⌃'; transform: rotate(180deg); display: inline-block; font-size: 0.65rem; margin-top: -2px; font-weight: bold; }
 
         /* Tombol Bingkai Biru */
         .btn-myut-layout {
@@ -86,8 +63,9 @@
             font-size: 0.95rem;
             cursor: pointer;
             transition: 0.2s;
+            outline: none;
         }
-        .btn-myut-layout:hover { background: var(--primary); color: var(--white); }
+        .btn-myut-layout:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(3, 57, 128, 0.2); }
 
         /* --- BANNER HIGHLIGHT --- */
         .highlight-container {
@@ -96,194 +74,10 @@
             border-radius: 15px;
             overflow: hidden;
             margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
             border: 1px solid var(--border);
         }
         .banner-image-wrapper { width: 100%; height: 180px; overflow: hidden; position: relative; }
         .banner-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .running-text-wrapper { background: var(--primary); color: white; padding: 10px 0; white-space: nowrap; overflow: hidden; display: flex; align-items: center; }
-        .running-text { display: inline-block; padding-left: 100%; font-weight: 700; font-size: 1.1rem; animation: marquee 15s linear infinite; }
-        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-
-        /* --- ELEMEN KONTEN SECTIONS --- */
-        .content-section { display: none; } 
-        .content-section.active { display: block; } 
-        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
-        .badge { background: #bce2fd; color: var(--primary); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-        h3 { color: var(--primary); margin: 15px 0 10px 0; font-size: 1.5rem; }
-        p { line-height: 1.6; color: #475569; }
-        .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
-
-        /* --- LOGIKA KALKULATOR KOMISI --- */
-        .calculator-group { margin-bottom: 15px; }
-        .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
-        .calculator-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem; }
-        .btn-hitung { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
-        .result-container { margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
-        .result-box { flex: 1; min-width: 200px; padding: 15px; background: var(--white); border-left: 5px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); border-left-width: 5px; }
-        .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
-        .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <h2>Mitra Playbook</h2>
-        <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
-        <ul id="menuList">
-            <li class="active" onclick="openTab(event, 'lokasi-warehouse')">📍 Lokasi Warehouse</li>
-            <li onclick="openTab(event, 'seragam-atribut')">👕 Seragam & Atribut</li>
-            <li onclick="openTab(event, 'absensi')">🗓️ Absensi</li>
-            <li onclick="openTab(event, 'pembayaran')">💵 Skema Pembayaran</li>
-            <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
-            <li onclick="openTab(event, 'bpjs')">🪪 BPJS</li>
-            <li onclick="openTab(event, 'astro-get-astro')">🧑‍🧒‍🧒 Astro Get Astro</li>
-            <li onclick="openTab(event, 'izin-berbayar')">📩 Izin Berbayar</li>
-            <li onclick="openTab(event, 'jenis-pelanggaran')">🚫 Jenis-Jenis Pelanggaran</li>
-            <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
-        </ul>
-    </nav>
-
-    <main>
-        <div class="ut-header-wrapper">
-            <div class="ut-top-yellow-bar">
-                <div class="ut-top-left">
-                    📢 <span>Pusat Informasi Operasional & Playbook Mitra Terbaru</span>
-                </div>
-                <div class="ut-top-right">
-                    <input type="text" class="ut-mini-search" placeholder="Cari cepat...">
-                    <div class="ut-social-icons">
-                        <span>▶️</span> <span>📸</span> <span>🌐 EN</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="ut-main-navbar">
-                <div class="ut-brand">
-                    <span class="ut-brand-logo">🚀</span>
-                    <span>MitraHub</span>
-                </div>
-                
-                <ul class="ut-nav-links">
-                    <li class="ut-link-item">Profil</li>
-                    <li class="ut-link-item">Panduan</li>
-                    <li class="ut-link-item">Layanan</li>
-                </ul>
-
-                <div class="ut-action">
-                    <button class="btn-myut-layout" onclick="bukaLinkAiEksternal()">Informasi Mitra</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="highlight-container">
-            <div class="banner-image-wrapper">
-                <img src="coverbanner.png" alt="Pusat Informasi" class="content-image">
-            </div>
-            <div class="running-text-wrapper">
-                <div class="running-text">
-                    📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |      🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
-                </div>
-            </div>
-        </div>
-
-        <div id="lokasi-warehouse" class="content-section active">
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/jrXSp3bLYAxUXpjq7?g_st=ac" target="_blank" style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block;">📌 Lokasi Warehouse Dry Cibitung</a>
-            </div>
-            <div class="card">
-                <span class="badge">Lokasi Warehouse</span>
-                <h3>Warehouse Dry Cibitung (CBT)</h3>
-                <p>Jl. Kp. Tangsi Jatiwangi No.74, Jatiwangi, Kec. Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530</p>
-                <img src="CBT.png" alt="CBT" class="content-image">
-            </div>
-        </div>
-                
-        <div id="seragam-atribut" class="content-section">
-            <div class="card">
-                <span class="badge">Grooming</span>
-                <h3>Warna Pakaian</h3>
-                <img src="Wseragam.png" alt="Warna Seragam" class="content-image">
-            </div>
-        </div>
-
-        <div id="absensi" class="content-section">
-            <div class="card">
-                <span class="badge">Absensi</span>
-                <h3>Astro Crew</h3>
-                <img src="absenmasuk.png" class="content-image">
-            </div>
-        </div>
-
-        <div id="pembayaran" class="content-section">
-            <div class="card">
-                <span class="badge">Pembayaran Komisi Harian</span>
-                <h3>Mitra Existing</h3>
-                <p>Penerimaan komisi tanggal 05 setiap bulannya, dengan periode hitungan 01-30/31 setiap bulannya</p>
-            </div>
-
-            <div class="card">
-                <span class="badge">Simulasi kalkulator komisi new joiner</span>
-                <div class="calculator-group">
-                    <label for="joinDate">Tanggal Join (Join Date)</label>
-                    <input type="date" id="joinDate">
-                </div>
-                <div class="calculator-group">
-                    <label for="jumlahShift">Jumlah Hari Kerja / HK</label>
-                    <input type="number" id="jumlahShift" placeholder="Contoh: 20">
-                </div>
-                <div class="calculator-group">
-                    <label for="rateKomisi">Komisi Harian (Rp)</label>
-                    <input type="number" id="rateKomisi" placeholder="Contoh: 50000">
-                </div>
-                <button class="btn-hitung" onclick="hitungKomisiDanJadwal()">Hitung Otomatis</button>
-                <div class="result-container">
-                    <div class="result-box">
-                        <h4>Total Komisi Diterima:</h4>
-                        <p id="totalKomisiResult">Rp 0</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="insentif-bsc" class="content-section"><div class="card"><h3>Insentif BSC</h3><p>HK ≥ 20 hari → mendapatkan 100% BSC</p></div></div>
-        <div id="bpjs" class="content-section"><div class="card"><h3>BPJS JKK</h3><p>Prosedur Klaim JKK aktif.</p></div></div>
-        <div id="astro-get-astro" class="content-section"><div class="card"><h3>Astro Get Astro</h3><p>Dapatkan komisi senilai Rp. 100.000,-</p></div></div>
-        <div id="izin-berbayar" class="content-section"><div class="card"><h3>Izin Berbayar</h3><p>Izin sakit durasi maksimal 1 hari/bulan.</p></div></div>
-        <div id="jenis-pelanggaran" class="content-section"><div class="card"><h3>Thorny Stick</h3><p>Surat Peringatan (SP) hingga Terminasi.</p></div></div>
-        <div id="bantuan" class="content-section"><div class="card"><h3>Bantuan SPV</h3><p>Silahkan hubungi SPV masing-masing.</p></div></div>
-                             
-    </main>
-                    
-<script>
-    function bukaLinkAiEksternal() {
-        window.open("https://ai.studio/apps/54f2a96d-cf2f-46e7-be00-91bf5b2dec47", "_blank");
-    }
-
-    function openTab(evt, tabName) {
-        let sections = document.getElementsByClassName("content-section");
-        for (let i = 0; i < sections.length; i++) { sections[i].classList.remove("active"); }
-        let menuItems = document.querySelectorAll("#menuList li");
-        menuItems.forEach(item => item.classList.remove("active"));
-        let targetSection = document.getElementById(tabName);
-        if(targetSection) { targetSection.classList.add("active"); }
-        evt.currentTarget.classList.add("active");
-    }
-
-    function searchGlobal() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let cards = document.getElementsByClassName('card');
-        for (let i = 0; i < cards.length; i++) {
-            let text = cards[i].innerText.toLowerCase();
-            if (text.includes(input)) { cards[i].style.display = "block"; } else { cards[i].style.display = "none"; }
-        }
-    }
-
-    function hitungKomisiDanJadwal() {
-        let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
-        let rate = parseFloat(document.getElementById('rateKomisi').value) || 0;
-        let totalUang = shift * rate;
-        document.getElementById('totalKomisiResult').innerText = "Rp " + totalUang.toLocaleString('id-ID');
-    }
-</script>
-</body>
-</html>
+        .running-text-wrapper { background: var(--primary); color: white; padding: 10px 0; white-space: nowrap; overflow: hidden; position: relative; display: flex; align-items: center; }
+        .running-text { display: inline-block; padding-left: 100%; font-weight
