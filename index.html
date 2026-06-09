@@ -21,7 +21,7 @@
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
         nav ul { list-style: none; padding: 0; }
         nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
-        nav li:hover { background: #bce2fd; } /* Perbaikan: Pagar double dihapus */
+        nav li:hover { background: #bce2fd; } 
         nav li.active { background: var(--primary); color: white; }
 
         /* Main Content */
@@ -33,7 +33,7 @@
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
             border: 1px solid var(--border);
         }
@@ -79,6 +79,51 @@
             animation-play-state: paused;
         }
 
+        /* --- MENU AI TOOLS BAR DI ATAS KONTEN --- */
+        .ai-tools-bar {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .ai-tools-bar h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .ai-tabs-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .ai-tab-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-tab-btn:hover {
+            background: #e2e8f0;
+            color: var(--primary);
+        }
+        .ai-tab-btn.active {
+            background: #e0f2fe;
+            color: #0369a1;
+            border-color: #7dd3fc;
+        }
+
         /* Content Sections */
         .content-section { display: none; } 
         .content-section.active { display: block; } 
@@ -99,6 +144,22 @@
         .result-box { flex: 1; min-width: 200px; padding: 15px; background: #fdf2fb; border-left: 5px solid var(--primary); border-radius: 4px; }
         .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
         .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
+
+        /* Iframe Frame AI */
+        .ai-iframe-wrapper {
+            width: 100%;
+            height: 650px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -127,17 +188,30 @@
             </div>
             <div class="running-text-wrapper">
                 <div class="running-text">
-                    📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |     🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
+                    📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |      🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
                 </div>
+            </div>
+        </div>
+
+        <div class="ai-tools-bar">
+            <h4>🤖 Ekosistem AI Tools Mitra</h4>
+            <div class="ai-tabs-container">
+                <button class="ai-tab-btn" onclick="openAiTool(event, 'ai-studio-apps')">⚡ AI Studio App</button>
+                </div>
+        </div>
+
+        <div id="ai-studio-apps" class="content-section">
+            <div class="ai-iframe-wrapper">
+                <iframe src="https://ai.studio/apps/54f2a96d-cf2f-46e7-be00-91bf5b2dec47" allow="clipboard-read; clipboard-write; microphone; camera"></iframe>
             </div>
         </div>
 
         <div id="lokasi-warehouse" class="content-section active">
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/jrXSp3bLYAxUXpjq7?g_st=ac" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 📌 Lokasi Warehouse Dry Cibitung</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  📌 Lokasi Warehouse Dry Cibitung</a>
             </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
@@ -147,9 +221,9 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/Q2ffTJvEh3Zw5cXSA?g_st=ac" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 📌 Lokasi Warehouse Dry Sentul</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  📌 Lokasi Warehouse Dry Sentul</a>
             </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
@@ -159,9 +233,9 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/PHUnKsiRo7heKwde7" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 📌 Lokasi Warehouse Fresh Cibinong</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  📌 Lokasi Warehouse Fresh Cibinong</a>
             </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
@@ -171,9 +245,9 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/evm2U1DCBfPbW2SP8?g_st=ac" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 📌 Lokasi Warehouse Fresh Bogor</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  📌 Lokasi Warehouse Fresh Bogor</a>
             </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
@@ -183,9 +257,9 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/49bSHzA8HBz7Y7DH9?g_st=ac" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 📌 Lokasi Warehouse Frozen Pegangsaan</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  📌 Lokasi Warehouse Frozen Pegangsaan</a>
             </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
@@ -195,9 +269,9 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/H2gHxCRd5U9phHzZ8" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 📌 Lokasi Warehouse Frozen Srengseng</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  📌 Lokasi Warehouse Frozen Srengseng</a>
             </div>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
@@ -305,15 +379,15 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://play.google.com/store/apps/details?id=com.bpjstku" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 🤖 Download aplikasi JMO(Jamsostek Mobile) disini</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  🤖 Download aplikasi JMO(Jamsostek Mobile) disini</a>
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://www.bpjsketenagakerjaan.go.id/kontak.html#plkk" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 🏥 Daftar fasilitas kesehatan rekanan BPJSTK</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  🏥 Daftar fasilitas kesehatan rekanan BPJSTK</a>
             </div>
         </div>
         
@@ -328,9 +402,9 @@
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZFRY199zWktq2A09cQE9TBTTIO_KYvOrZuTj4tUINAr2syQ/viewform" 
-                 target="_blank" 
-                 style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                 ▶️ Pengisian form Astro Get Astro 🧑🏻‍🚀</a>
+                  target="_blank" 
+                  style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                  ▶️ Pengisian form Astro Get Astro 🧑🏻‍🚀</a>
             </div>
         </div>
 
@@ -357,9 +431,9 @@
                 <img src="pelaporan.png" class="content-image">
                 <div style="margin-top: 25px;">
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSeemPOoY3fWvrXl0Rj3C005DjZe5R7rM04yLSCFWds9adiiNA/viewform" 
-                     target="_blank" 
-                     style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                     ▶️ Pelaporan Pelanggaran</a>
+                      target="_blank" 
+                      style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
+                      ▶️ Pelaporan Pelanggaran</a>
                 </div>
             </div>
             <div class="card">
@@ -436,9 +510,14 @@
         </div>
                              
     </main>
-                
+                    
 <script>
+    // Fungsi Tab Konten Utama (Navigasi Kiri)
     function openTab(evt, tabName) {
+        // Matikan tab AI yang mungkin sedang aktif
+        let aiButtons = document.querySelectorAll(".ai-tab-btn");
+        aiButtons.forEach(btn => btn.classList.remove("active"));
+
         let sections = document.getElementsByClassName("content-section");
         for (let i = 0; i < sections.length; i++) {
             sections[i].classList.remove("active");
@@ -450,6 +529,30 @@
         let targetSection = document.getElementById(tabName);
         if(targetSection) {
             targetSection.classList.add("active");
+        }
+        evt.currentTarget.classList.add("active");
+    }
+
+    // Fungsi Tab Khusus AI Tools (Navigasi Atas)
+    function openAiTool(evt, aiTabName) {
+        // Nonaktifkan semua menu di sidebar kiri
+        let menuItems = document.querySelectorAll("#menuList li");
+        menuItems.forEach(item => item.classList.remove("active"));
+
+        // Sembunyikan seluruh section konten
+        let sections = document.getElementsByClassName("content-section");
+        for (let i = 0; i < sections.length; i++) {
+            sections[i].classList.remove("active");
+        }
+
+        // Reset status tombol AI
+        let aiButtons = document.querySelectorAll(".ai-tab-btn");
+        aiButtons.forEach(btn => btn.classList.remove("active"));
+
+        // Aktifkan panel iframe AI yang dipilih
+        let targetAiSection = document.getElementById(aiTabName);
+        if(targetAiSection) {
+            targetAiSection.classList.add("active");
         }
         evt.currentTarget.classList.add("active");
     }
