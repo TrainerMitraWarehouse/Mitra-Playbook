@@ -11,12 +11,11 @@
             --text: #1e293b;
             --border: #bce2fd;
             --white: #ffffff;
-            --ut-yellow: #facc15; /* Warna kuning khas top bar UT */
         }
         
         body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
         
-        /* Sidebar Navigasi Kiri */
+        /* Sidebar Navigasi Kiri - Warna Tetap Sesuai Github */
         nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; top: 0; }
         nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; margin-top: 10px; }
         #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
@@ -29,7 +28,7 @@
         main { margin-left: 280px; padding: 0 40px 40px 40px; width: calc(100% - 280px); box-sizing: border-box; }
 
         /* =======================================================
-           🚀 UT SPECIFIC PREMIUM HEADER DESIGN (HORIZONTAL TOP)
+           🚀 UT-STYLE PREMIUM HEADER DESIGN (WARNA TETAP ASLI)
            ======================================================= */
         .ut-header-wrapper {
             margin-left: -40px;
@@ -38,16 +37,17 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
         }
 
-        /* 1. Bar Kuning Paling Atas (Top Yellow Bar) */
+        /* 1. Bar Atas (Menggunakan warna putih asli kodinganmu) */
         .ut-top-yellow-bar {
-            background-color: var(--ut-yellow);
+            background-color: var(--white);
             padding: 10px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 0.85rem;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
         }
         .ut-top-left {
             display: flex;
@@ -59,10 +59,10 @@
             align-items: center;
             gap: 20px;
         }
-        /* Kotak pencarian kecil di dalam bar kuning */
+        /* Kotak pencarian kecil di dalam bar atas */
         .ut-mini-search {
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
+            background: var(--white);
+            border: 1px solid var(--border);
             padding: 6px 15px;
             border-radius: 20px;
             width: 180px;
@@ -71,7 +71,7 @@
             transition: 0.2s;
         }
         .ut-mini-search:focus {
-            background: #fff;
+            border-color: var(--primary);
             width: 220px;
         }
         .ut-social-icons {
@@ -80,14 +80,13 @@
             font-size: 1rem;
         }
 
-        /* 2. Bar Putih Utama (Main White Navbar) */
+        /* 2. Bar Utama (Main Navbar Putih) */
         .ut-main-navbar {
             background: var(--white);
             padding: 15px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #e2e8f0;
         }
         .ut-brand {
             display: flex;
@@ -116,7 +115,7 @@
         }
         .ut-link-item {
             font-weight: 600;
-            color: #475569;
+            color: var(--text);
             font-size: 0.95rem;
             cursor: pointer;
             transition: 0.2s;
@@ -127,7 +126,7 @@
         .ut-link-item:hover {
             color: var(--primary);
         }
-        /* Efek panah dropdown kecil di sebelah teks menu */
+        /* Tanda panah dropdown kecil di sebelah teks menu */
         .ut-link-item::after {
             content: '⌃';
             transform: rotate(180deg);
@@ -137,7 +136,7 @@
             font-weight: bold;
         }
 
-        /* 3. Tombol Kanan Berbingkai Persis Gaya MyUT */
+        /* 3. Tombol Kanan Berbingkai Biru Sesuai Variabel Warna Aslimu */
         .btn-myut-layout {
             background: transparent;
             color: var(--primary);
@@ -223,9 +222,9 @@
         .calculator-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem; }
         .calculator-group input:focus { border-color: var(--primary); }
         .btn-hitung { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .btn-hitung:hover { background: #802f77; }
+        .btn-hitung:hover { background: #033980; opacity: 0.9; }
         .result-container { margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
-        .result-box { flex: 1; min-width: 200px; padding: 15px; background: #fdf2fb; border-left: 5px solid var(--primary); border-radius: 4px; }
+        .result-box { flex: 1; min-width: 200px; padding: 15px; background: var(--white); border-left: 5px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); border-left-width: 5px; }
         .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
         .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
 
@@ -282,7 +281,7 @@
             <div class="ut-main-navbar">
                 <div class="ut-brand">
                     <span class="ut-brand-logo">🚀</span>
-                    <span>MitraHub UT-Style</span>
+                    <span>MitraHub</span>
                 </div>
                 
                 <ul class="ut-nav-links">
@@ -623,7 +622,6 @@
                     
 <script>
     function openTab(evt, tabName) {
-        // Matikan efek aktif (biru solid) pada tombol Informasi Mitra jika menu sidebar kiri diklik
         document.getElementById("btnInfoMitra").classList.remove("active");
 
         let sections = document.getElementsByClassName("content-section");
@@ -642,23 +640,22 @@
     }
 
     function openAiTool(evt, aiTabName) {
-        // Matikan penanda menu aktif di sidebar kiri
         let menuItems = document.querySelectorAll("#menuList li");
         menuItems.forEach(item => item.classList.remove("active"));
 
-        // Sembunyikan konten teks biasa
         let sections = document.getElementsByClassName("content-section");
         for (let i = 0; i < sections.length; i++) {
             sections[i].classList.remove("active");
         }
 
-        // Tampilkan panel Iframe AI temanmu
+        let aiButtons = document.querySelectorAll(".btn-myut-layout");
+        aiButtons.forEach(btn => btn.classList.remove("active"));
+
         let targetAiSection = document.getElementById(aiTabName);
         if(targetAiSection) {
             targetAiSection.classList.add("active");
         }
         
-        // Aktifkan visual tombol berbingkai biru di kanan atas (menjadi biru solid)
         evt.currentTarget.classList.add("active");
     }
 
