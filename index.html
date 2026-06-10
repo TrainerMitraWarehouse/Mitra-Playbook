@@ -159,17 +159,18 @@
     </style>
 </head>
 <body>
-    
+    <body>
     <div id="loginScreen">
         <div class="login-card">
             <h2>Login Mitra Aktif</h2>
             <input type="text" id="loginNoHp" class="input-field" placeholder="Nomor HP">
             <input type="password" id="loginStaffId" class="input-field" placeholder="Staff ID">
-            <button onclick="prosesLogin()" id="btnLogin" class="btn-login">Login</button>
+            <button onclick="prosesLogin()" id="btnLogin" class="btn-login">Masuk Sistem</button>
+            <p id="pesanError" style="color: red; display: none;"></p>
         </div>
     </div>
-    
-    <div id="appContainer" style="display: none; width: 100%;">
+
+    <div id="appContainer" style="display: none; width: 100%; display: flex;">
         <nav>
             <h2>Mitra Playbook</h2>
             <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
