@@ -86,14 +86,12 @@
         .badge { background: #bce2fd; color: var(--primary); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
         h3 { color: var(--primary); margin: 15px 0 10px 0; font-size: 1.5rem; }
         p { line-height: 1.6; color: #475569; }
-        .content-image { 
-            max-width: 100%; 
-            height: 150px;           /* Tambahkan tinggi tetap yang lebih kecil (misalnya 150px) */
-            object-fit: cover;       /* Agar gambar tetap proporsional dan tidak gepeng */
-            border-radius: 10px; 
-            margin-top: 15px; 
-            display: block; 
-        }
+        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .badge { background: #bce2fd; color: var(--primary); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        h3 { color: var(--primary); margin: 15px 0 10px 0; font-size: 1.5rem; }
+        p { line-height: 1.6; color: #475569; }
+        .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; } /* <-- BAGIAN INI */
+        .warehouse-img { max-width: 250px; /* Ubah angka ini sesuai selera (misal 200px / 300px) */height: auto; border-radius: 10px;margin-top: 15px;display: block;}
         
         /* --- KALKULATOR KOMISI LOGIC --- */
         .calculator-group { margin-bottom: 15px; }
@@ -150,7 +148,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Dry Cibitung (CBT)</h3>
                 <p>Jl. Kp. Tangsi Jatiwangi No.74, Jatiwangi, Kec. Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530</p>
-                <img src="CBT.png" alt="CBT" class="content-image">
+                <img src="CBT.png" alt="CBT" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/Q2ffTJvEh3Zw5cXSA?g_st=ac" 
@@ -162,7 +160,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Dry Sentul (STL)</h3>
                 <p>Jl. Olympic Raya No.A12, Leuwinutug, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16810</p>
-                <img src="STL.png" alt="STL" class="content-image">
+                <img src="STL.png" alt="STL" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/PHUnKsiRo7heKwde7" 
@@ -174,7 +172,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Fresh Cibinong (CBN)</h3>
                 <p>Jl. Bintang Mas No.88, Nanggewer Mekar, Kec. Cibinong, Kabupaten Bogor, Jawa Barat 16912</p>
-                <img src="CBN.png" alt="CBN" class="content-image">
+                <img src="CBN.png" alt="CBN" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/evm2U1DCBfPbW2SP8?g_st=ac" 
@@ -186,7 +184,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Fresh Bogor (BGR)</h3>
                 <p>FR55+V44, Pasir Jambu, Sukaraja, Bogor Regency, West Java 16158</p>
-                <img src="BGO.png" alt="BGO" class="content-image">
+                <img src="BGO.png" alt="BGO" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/49bSHzA8HBz7Y7DH9?g_st=ac" 
@@ -198,7 +196,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Pegangsaan (PGS)</h3>
                 <p>Jl. Pegangsaan Dua No.5, RT.4/RW.3, Pegangsaan Dua, Kelapa Gading, North Jakarta City, Jakarta 14250</p>
-                <img src="PGS.png" alt="PGS" class="content-image">
+                <img src="PGS.png" alt="PGS" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/H2gHxCRd5U9phHzZ8" 
@@ -210,7 +208,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Srengseng (SRG)</h3>
                 <p>Jl. Srengseng Raya, RT.5/RW.1, Srengseng, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11630</p>
-                <img src="SRGG.png" alt="SRGG" class="content-image">
+                <img src="SRGG.png" alt="SRGG" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/6TeSDnadqfZ5o4NW9?g_st=ac" 
@@ -222,7 +220,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Bitung (BIT)</h3>
                 <p>PHW3+8QQ, Curug Kulon, Curug, Tangerang Regency, Banten 15810</p>
-                <img src="BIT.png" alt="BIT" class="content-image">
+                <img src="BIT.png" alt="BIT" class="warehouse-img">
             </div>
             <div style="margin-top: 25px;">
                 <a href="https://maps.app.goo.gl/NJxoirXKAw1TVTPC7?g_st=awb" 
@@ -234,7 +232,7 @@
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Sunter (STR)</h3>
                 <p>VV8G+2XX, RT.6/RW.4, Papanggo, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14340</p>
-                <img src="STR.png" alt="STR" class="content-image">
+                <img src="STR.png" alt="STR" class="warehouse-img">
             </div>
         </div>
                 
