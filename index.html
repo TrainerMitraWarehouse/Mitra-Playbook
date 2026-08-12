@@ -89,6 +89,12 @@
         .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
         .warehouse-img { max-width: 250px; height: auto; border-radius: 10px; margin-top: 15px; display: block; }
         
+        /* Tombol Tautan */
+        .btn-link { background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s; margin-top: 15px; }
+        .btn-link:hover { background-color: #022a5e; }
+        .btn-whatsapp { background-color: #25d366; }
+        .btn-whatsapp:hover { background-color: #1da851; }
+
         /* --- KALKULATOR KOMISI LOGIC --- */
         .calculator-group { margin-bottom: 15px; }
         .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
@@ -118,6 +124,7 @@
             <li onclick="openTab(event, 'izin-berbayar')">📩 Izin Berbayar</li>
             <li onclick="openTab(event, 'jenis-pelanggaran')">🚫 Jenis-Jenis Pelanggaran</li>
             <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
+            <!-- Menu Panduan yang sebelumnya hilang -->
             <li onclick="openTab(event, 'panduan')">📚 Panduan Proses Kerja</li>
         </ul>
     </nav>
@@ -135,96 +142,79 @@
         </div>
 
         <div id="lokasi-warehouse" class="content-section active">
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/jrXSp3bLYAxUXpjq7?g_st=ac" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Dry Cibitung</a>
-            </div>
+            <a href="https://maps.app.goo.gl/jrXSp3bLYAxUXpjq7?g_st=ac" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Dry Cibitung
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Dry Cibitung (CBT)</h3>
                 <p>Jl. Kp. Tangsi Jatiwangi No.74, Jatiwangi, Kec. Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530</p>
                 <img src="CBT.png" alt="CBT" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/Q2ffTJvEh3Zw5cXSA?g_st=ac" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Dry Sentul</a>
-            </div>
+
+            <a href="https://maps.app.goo.gl/Q2ffTJvEh3Zw5cXSA?g_st=ac" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Dry Sentul
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Dry Sentul (STL)</h3>
                 <p>Jl. Olympic Raya No.A12, Leuwinutug, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16810</p>
                 <img src="STL.png" alt="STL" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/PHUnKsiRo7heKwde7" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Fresh Cibinong</a>
-            </div>
+            
+            <a href="https://maps.app.goo.gl/PHUnKsiRo7heKwde7" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Fresh Cibinong
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Fresh Cibinong (CBN)</h3>
                 <p>Jl. Bintang Mas No.88, Nanggewer Mekar, Kec. Cibinong, Kabupaten Bogor, Jawa Barat 16912</p>
                 <img src="CBN.png" alt="CBN" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/evm2U1DCBfPbW2SP8?g_st=ac" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Fresh Bogor</a>
-            </div>
+
+            <a href="https://maps.app.goo.gl/evm2U1DCBfPbW2SP8?g_st=ac" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Fresh Bogor
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Fresh Bogor (BGR)</h3>
                 <p>FR55+V44, Pasir Jambu, Sukaraja, Bogor Regency, West Java 16158</p>
                 <img src="BGO.png" alt="BGO" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/49bSHzA8HBz7Y7DH9?g_st=ac" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Frozen Pegangsaan</a>
-            </div>
+
+            <a href="https://maps.app.goo.gl/49bSHzA8HBz7Y7DH9?g_st=ac" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Frozen Pegangsaan
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Pegangsaan (PGS)</h3>
                 <p>Jl. Pegangsaan Dua No.5, RT.4/RW.3, Pegangsaan Dua, Kelapa Gading, North Jakarta City, Jakarta 14250</p>
                 <img src="PGS.png" alt="PGS" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/H2gHxCRd5U9phHzZ8" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Frozen Srengseng</a>
-            </div>
+
+            <a href="https://maps.app.goo.gl/H2gHxCRd5U9phHzZ8" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Frozen Srengseng
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Srengseng (SRG)</h3>
                 <p>Jl. Srengseng Raya, RT.5/RW.1, Srengseng, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11630</p>
                 <img src="SRGG.png" alt="SRGG" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/6TeSDnadqfZ5o4NW9?g_st=ac" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Frozen Bitung</a>
-            </div>
+
+            <a href="https://maps.app.goo.gl/6TeSDnadqfZ5o4NW9?g_st=ac" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Frozen Bitung
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Bitung (BIT)</h3>
                 <p>PHW3+8QQ, Curug Kulon, Curug, Tangerang Regency, Banten 15810</p>
                 <img src="BIT.png" alt="BIT" class="warehouse-img">
             </div>
-            <div style="margin-top: 25px;">
-                <a href="https://maps.app.goo.gl/NJxoirXKAw1TVTPC7?g_st=awb" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   📌 Lokasi Warehouse Frozen Sunter</a>
-            </div>
+
+            <a href="https://maps.app.goo.gl/NJxoirXKAw1TVTPC7?g_st=awb" target="_blank" class="btn-link">
+                📌 Lokasi Warehouse Frozen Sunter
+            </a>
             <div class="card">
                 <span class="badge">Lokasi Warehouse</span>
                 <h3>Warehouse Frozen Sunter (STR)</h3>
@@ -268,299 +258,3 @@
                 <h3>Mitra Existing</h3>
                 <p>Penerimaan komisi tanggal 05 setiap bulannya, dengan periode hitungan 01-30/31 setiap bulannya</p>
             </div>
-
-            <div class="card">
-                <span class="badge">Simulasi kalkulator komisi new joiner</span>
-                <h3>Ayo hitung komisimu disini!!!</h3>
-                <p>Kalkulator ini hanya simulasi, hasil perhitungan komisi bisa saja berbeda tergantung hari kerja aktual mitra. Masukkan tanggal join untuk menghitung estimasi pendapatan beserta tanggal pasti pencairannya, pastikan hari kerjamu sesuai sampai tanggal tutup buku yang sudah ditentukan.</p>
-                
-                <div class="calculator-group">
-                    <label for="joinDate">Tanggal Join (Join Date)</label>
-                    <input type="date" id="joinDate">
-                </div>
-
-                <div class="calculator-group">
-                    <label for="jumlahShift">Jumlah Hari Kerja / HK</label>
-                    <input type="number" id="jumlahShift" placeholder="Contoh: 20" min="0">
-                </div>
-
-                <div class="calculator-group">
-                    <label for="rateKomisi">Komisi Harian / per Shift (Rp)</label>
-                    <input type="number" id="rateKomisi" placeholder="Contoh: 50000" min="0">
-                </div>
-
-                <button class="btn-hitung" onclick="hitungKomisiDanJadwal()">Hitung Otomatis</button>
-
-                <div class="result-container">
-                    <div class="result-box">
-                        <h4>Total Komisi Diterima:</h4>
-                        <p id="totalKomisiResult">Rp 0</p>
-                    </div>
-                    <div class="result-box">
-                        <h4>Tanggal Pembayaran:</h4>
-                        <p id="tanggalBayarResult">-</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="insentif-bsc" class="content-section">
-            <div class="card">
-                <span class="badge">Insentif BSC Warehouse Staff</span>
-                <h3>Syarat dan Ketentuan</h3>
-                <p>• HK ≥ 20 hari → mendapatkan 100% BSC</p>
-                <p>• HK 16-19 hari → mendapatkan BSC prorata</p>
-                <img src="bscprorata.png" class="content-image">
-                <p>• Mitra yang join setelah tanggal 1 → tetap berhak BSC jika HK ≥ 16 hari</p>
-                <p>• Mitra yang memiliki kurang dari 16 hari kerja maka tidak mendapatkan BSC pada bulan tersebut</p>
-                <p>• Tidak memiliki izin lebih dari dua kali, atau alpha (tidak hadir tanpa keterangan)</p>
-                <p>• Mitra harus tetap bekerja hingga minimal tanggal 18 bulan berikutnya</p>
-                <p>• Jika terdapat satu hari alpha atau lebih, maka mitra tidak berhak menerima BSC</p>
-                <p>• 1 hari izin → Mendapatkan 85% BSC yang diterima bulan itu</p>
-                <p>• 2 hari izin → Mendapatkan 40% BSC yang diterima bulan itu</p>
-                <p>• Lebih dari 2 kali izin → Tidak mendapatkan BSC</p>
-                <p>• Telat maks 1 menit dalam 6x / Bulan = Gugur (Hangus) = Terminasi</p>
-            </div>
-        </div>   
-        
-        <div id="bpjs" class="content-section">
-            <div class="card">
-                <span class="badge">BPJS Jaminan Kecelakaan Kerja (JKK)</span>
-                <h3>Prosedur Klaim BPJS JKK)</h3>
-                <img src="BPJSTK.png" class="content-image">
-            </div>
-            <div style="margin-top: 25px;">
-                <a href="https://play.google.com/store/apps/details?id=com.bpjstku" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   🤖 Download aplikasi JMO(Jamsostek Mobile) disini</a>
-            </div>
-            <div style="margin-top: 25px;">
-                <a href="https://www.bpjsketenagakerjaan.go.id/kontak.html#plkk" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   🏥 Daftar fasilitas kesehatan rekanan BPJSTK</a>
-            </div>
-        </div>
-        
-        <div id="astro-get-astro" class="content-section">
-            <div class="card">
-                <span class="badge">Astro Get Astro</span>
-                <h3>Daftarkan rekanmu dan dapatkan komisi senilai Rp. 100.000,-</h3>
-                <p>Syarat dan Ketentuan:</p>
-                <p>• jika rekanmu masih bergabung pada masa kerja 1 bulan, maka kamu berhak mendapatkan Rp. 30.000,-</p>
-                <p>• jika pada masa kerja ke-3 bulan rekanmu masih bergabung di Astro, maka kamu berhak mendapatkan Rp. 70.000,-</p>
-            </div>
-            <div style="margin-top: 25px;">
-                <a href="https://bit.ly/astro-get-astro-referral" 
-                   target="_blank" 
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                   ▶️ Pengisian form Astro Get Astro 🧑🏻‍🚀</a>
-            </div>
-        </div>
-
-        <div id="izin-berbayar" class="content-section">
-            <div class="card">
-                <span class="badge">Izin Berbayar</span>
-                <h3>Syarat dan Ketentuan</h3>
-                <p>Berikut ini izin berbayar yang berlaku, apabila terdapat mitra yang tidak hadir karena alasan tersebut, maka komisi harian tetap dibayarkan dengan melampirkan bukti pendukung dan ketentuan sebagai berikut</p>
-                <p>Syarat dan Ketentuan:</p>
-                <p>• Izin sakit rawat jalan, durasi maksimal 1 hari/bulan</p>
-                <p>• Izin sakit rawat inap, durasi maksimal 10 hari/bulan</p>
-                <p>• Izin menikah, durasi 3 hari</p>
-                <p>• Izin berduka (keluarga inti), durasi 2 hari</p>
-                <p>• Izin berduka (keluarga satu rumah), durasi 1 hari</p>
-                <p>• Izin pasangan melahirkan, durasi 2 hari</p>
-            </div>
-        </div>
-
-        <div id="jenis-pelanggaran" class="content-section">
-            <div class="card">
-                <span class="badge">Jenis-Jenis Pelanggaran</span>
-                <h3>Berikut ini merupakan jenis-jenis pelanggaran(Thorny Stick)</h3>
-                <p>Jika kamu menemukan pelanggaran, silahkan laporkan melalui link berikut ini</p>
-                <img src="pelaporan.png" class="content-image">
-                <div style="margin-top: 25px;">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeemPOoY3fWvrXl0Rj3C005DjZe5R7rM04yLSCFWds9adiiNA/viewform" 
-                       target="_blank" 
-                       style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-                       ▶️ Pelaporan Pelanggaran</a>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran hukum</h3>
-                <p>• Terbukti melakukan segala jenis tindak pidana yang diatur oleh KUHP</p>
-                <p>• Vandalisme atau tindakan perusakan terhadap properti</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran Operational</h3>
-                <p>• Absensi/Ketidakhadiran Tanpa izin (Bolos kerja)</p>
-                <p>• Terlambat berulang tanpa izin dan bukti yang jelas</p>
-                <p>• Pelanggaran jam kerja</p>
-                <p>• Tidak mengikuti SOP Prosedur</p>
-                <p>• Kelalaian yang menyebabkan kerusakan barang (Asset/SKU Item/Consumable/Customer)</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran Keuangan</h3>
-                <p>• Pencurian uang atau barang</p>
-                <p>• Penyalahgunaan diskon, kupon, barang promo</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran Customer</h3>
-                <p>• Perilaku Tidak Sopan terhadap customer</p>
-                <p>• Menyalahgunakan informasi customer</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran SDM</h3>
-                <p>• Pelecehan</p>
-                <p>• Diskriminasi</p>
-                <p>• Pelanggaran Kontrak Kerja</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran IT</h3>
-                <p>• Penyalahgunaan perangkat IT</p>
-                <p>• Merubah posisi aset selain keperluan operasional</p>
-                <p>• Pelanggaran Manipulasi Data</p>
-                <p>• Membocorkan sistem internal (membagikan data penjualan, sistem inventaris ke pihak luar)</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran 5R & K3</h3>
-                <p>• Mengabaikan protokol 5R (Ringkas, Rapi, Resik, Rawat dan Rajin)</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran Etika</h3>
-                <p>• Konflik Kepentingan</p>
-                <p>• Memberi dan/atau Menerima Suap/Gratifikasi</p>
-            </div>
-            <div class="card">
-                <h3>Pelanggaran Reputasi Perusahaan</h3>
-                <p>• Mencitrakan buruk Perusahaan</p>
-                <p>• Menggunakan seragam/nama Perusahaan untuk tindakan ilegal, pelanggaran norma atau pelanggaran hukum</p>
-            </div>
-            <div class="card">
-                <h3>Sanksi atas Pelanggaran (Thorny Stick)</h3>
-                <p>• Mitra yang terbukti melakukan pelanggaran terhadap ketentuan dalam Thorny Stick akan dikenakan sanksi berupa:</p>
-                <p>• Surat Peringatan (SP)</p>
-                <p>• Hingga Terminasi/PHK</p>
-                <h3> Penetapan sanksi dilakukan berdasarkan keputusan bersama dari:</h3>
-                <p>•SPV (Supervisor)</p>
-                <p>•Manager</p>
-                <p>•Mitra Management</p>
-            </div>
-        </div>
-        
-        <div id="bantuan" class="content-section">
-            <div class="card">
-                <span class="badge">Bantuan</span>
-                <h3>Silahkan hubungi SPV masing-masing, jika kamu mengalami kendala dibawah ini:</h3>
-                <p>• Pengajuan perubahan data diri, seperti : Nomer rekening, No HP, Email</p>
-                <p>• Kendala Absensi</p>
-                <p>• Kendala Komisi/BSC, seperti : Selisih jumlah saat penerimaan, terlambat ditransfer melebihi tanggal yang sudah ditentukan</p>
-                <p>• Kendala Akun Astro Crew, seperti : Auto Cleansing, Kendala login</p>
-                <p>• Jika masih perlu bantuan lebih lanjut, bisa menghubungi tim People melalui kontak Hotline di bawah ini</p>
-                
-                <div style="margin-top: 25px;">
-                    <a href="https://wa.me/6281398440178?text=Halo%20SPV,%20saya%20mengalami%20kendala%20terkait%20operasional." 
-                       target="_blank" 
-                       style="background-color: #25d366; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2); transition: 0.2s;">
-                       💬 Hotline Astro</a>
-            </div>
-        </div>
-
-        <div id="panduan" class="content-section">
-            <div class="card">
-                <span class="badge">Panduan Proses Kerja</span>
-                <h3>Berikut panduan proses kerja per masing - masing role dari mulai persiapan aset hingga proses pada sistem.</h3>
-                <p>• Untuk detail lebih lanjut silahkan klik link dibawah ini</p>
-        
-                <div style="margin-top: 25px;">
-                    <a href="https://trainermitrawarehouse.github.io/Proseskerjawh/" 
-                       target="_blank" 
-                       style="background-color: #25d366; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2); transition: 0.2s;">
-                       📚 Panduan Proses Kerja</a>
-            </div>
-        </div>
-    </div>
-                        
-    </main>
-        
-<script>
-    function openTab(evt, tabName) {
-        let sections = document.getElementsByClassName("content-section");
-        for (let i = 0; i < sections.length; i++) {
-            sections[i].classList.remove("active");
-        }
-
-        let menuItems = document.querySelectorAll("#menuList li");
-        menuItems.forEach(item => item.classList.remove("active"));
-
-        let targetSection = document.getElementById(tabName);
-        if(targetSection) {
-            targetSection.classList.add("active");
-        }
-        evt.currentTarget.classList.add("active");
-    }
-
-    function searchGlobal() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let cards = document.getElementsByClassName('card');
-
-        for (let i = 0; i < cards.length; i++) {
-            let text = cards[i].innerText.toLowerCase();
-
-            if (text.includes(input)) {
-                cards[i].style.display = "block";
-                cards[i].parentElement.classList.add("active");
-            } else {
-                cards[i].style.display = "none";
-            }
-        }
-    }
-
-    function hitungKomisiDanJadwal() {
-        let joinDateVal = document.getElementById('joinDate').value;
-        let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
-        let rate = parseFloat(document.getElementById('rateKomisi').value) || 0;
-        
-        if (!joinDateVal) {
-            alert("Silakan pilih Tanggal Join terlebih dahulu!");
-            return;
-        }
-
-        let totalUang = shift * rate;
-        let formatRupiah = new Intl.NumberFormat('id-ID', {
-            style: 'currency', currency: 'IDR', minimumFractionDigits: 0
-        }).format(totalUang);
-        document.getElementById('totalKomisiResult').innerText = formatRupiah;
-
-        let parts = joinDateVal.split('-');
-        let tahunJoin = parseInt(parts[0], 10);
-        let bulanJoin = parseInt(parts[1], 10) - 1; 
-        let tanggalJoin = parseInt(parts[2], 10);
-
-        let tanggalBayar = 0;
-        let targetBulan = bulanJoin;
-        let targetTahun = tahunJoin;
-
-        if (tanggalJoin >= 25) {
-            tanggalBayar = 19;
-            targetBulan = bulanJoin + 1; 
-        } 
-        else if (tanggalJoin <= 10) {
-            tanggalBayar = 19;
-            targetBulan = bulanJoin;     
-        }
-        else if (tanggalJoin >= 11 && tanggalJoin <= 24) {
-            tanggalBayar = 5;
-            targetBulan = bulanJoin + 1; 
-        }
-
-        let gajianDate = new Date(targetTahun, targetBulan, tanggalBayar);
-        let opsiFormat = { day: '2-digit', month: 'long', year: 'numeric' };
-        let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
-
-        document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
-    }
-</script>
-</body>
-</html>
