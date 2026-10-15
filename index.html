@@ -1,1158 +1,608 @@
 <!DOCTYPE html>
-
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Mitra Playbook</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-
         :root {
-
-            --primary: #033980;
-
-            --bg: #64b1fa;
-
-            --text: #1e293b;
-
-            --border: #bce2fd;
-
-            --white: #ffffff;
-
+            --primary: #0B3A82;
+            --accent: #2F80ED;
+            --bg: #F4F7FB;
+            --card: #ffffff;
+            --text: #0F172A;
+            --muted: #475569;
+            --soft: #64748B;
+            --border: #E2E8F0;
+            --tint: #E8F0FD;
         }
-
-        
-
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); }
-
-        
+        * { box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif; margin: 0; display: flex; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+        .ic { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
         /* Sidebar */
-
-        nav { width: 280px; height: 100vh; background: var(--white); border-right: 1px solid var(--border); padding: 20px; position: fixed; box-sizing: border-box; z-index: 100; }
-
-        nav h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 25px; }
-
-        #searchInput { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; outline: none; }
-
-        nav ul { list-style: none; padding: 0; }
-
-        nav li { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
-
-        nav li:hover { background: #bce2fd; } 
-
-        nav li.active { background: var(--primary); color: white; }
-
-
+        nav { width: 280px; height: 100vh; background: var(--card); border-right: 1px solid var(--border); padding: 24px 16px; position: fixed; overflow-y: auto; z-index: 100; }
+        nav h2 { font-size: 1.35rem; color: var(--primary); margin: 0 8px 18px; letter-spacing: -0.02em; font-weight: 800; }
+        .search { position: relative; margin-bottom: 8px; }
+        .search .ic { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--soft); }
+        #searchInput { width: 100%; padding: 11px 12px 11px 40px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); font: inherit; font-size: 0.9rem; outline: none; transition: 0.2s; }
+        #searchInput:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(47,128,237,0.15); }
+        nav ul { list-style: none; padding: 0; margin: 0; }
+        .nav-label { font-size: 0.78rem; font-weight: 600; color: var(--soft); padding: 18px 12px 6px; }
+        nav li:not(.nav-label) { position: relative; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: 0.2s; margin-bottom: 2px; display: flex; align-items: center; gap: 12px; font-weight: 500; font-size: 0.92rem; color: #334155; }
+        nav li:not(.nav-label):hover { background: var(--bg); color: var(--primary); }
+        nav li.active { background: var(--tint); color: var(--primary); font-weight: 700; }
+        nav li.active::before { content: ""; position: absolute; left: 0; top: 22%; bottom: 22%; width: 3px; border-radius: 3px; background: var(--primary); }
 
         /* Main Content */
-
-        main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); box-sizing: border-box; }
-
-
+        main { margin-left: 280px; padding: 32px 40px 60px; width: calc(100% - 280px); max-width: 1180px; }
 
         /* --- BANNER HIGHLIGHT --- */
-
-        .highlight-container {
-
-            width: 100%;
-
-            background: white;
-
-            border-radius: 15px;
-
-            overflow: hidden;
-
-            margin-bottom: 30px;
-
-            box-shadow: 0 10px 20px rgba(153, 58, 142, 0.15);
-
-            border: 1px solid var(--border);
-
-        }
-
-
-
-        .banner-image-wrapper {
-
-            width: 100%;
-
-            height: 180px; 
-
-            overflow: hidden;
-
-            position: relative;
-
-        }
-
-
-
-        .banner-image-wrapper img {
-
-            width: 100%;
-
-            height: 100%;
-
-            object-fit: cover; 
-
-        }
-
-
-
-        .running-text-wrapper {
-
-            background: var(--primary);
-
-            color: white;
-
-            padding: 10px 0;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            position: relative;
-
-            display: flex;
-
-            align-items: center;
-
-        }
-
-
-
-        .running-text {
-
-            display: inline-block;
-
-            padding-left: 100%;
-
-            font-weight: 700;
-
-            font-size: 1.1rem;
-
-            animation: marquee 15s linear infinite;
-
-        }
-
-
-
-        @keyframes marquee {
-
-            0% { transform: translate(0, 0); }
-
-            100% { transform: translate(-100%, 0); }
-
-        }
-
-
-
-        .running-text-wrapper:hover .running-text {
-
-            animation-play-state: paused;
-
-        }
-
-
+        .highlight-container { width: 100%; background: var(--card); border-radius: 22px; overflow: hidden; margin-bottom: 28px; box-shadow: 0 8px 30px rgba(11,58,130,0.10); border: 1px solid var(--border); }
+        .banner-image-wrapper { width: 100%; height: 180px; overflow: hidden; position: relative; }
+        .banner-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .running-text-wrapper { background: var(--primary); color: white; padding: 12px 0; white-space: nowrap; overflow: hidden; position: relative; display: flex; align-items: center; }
+        .running-text { display: inline-block; padding-left: 100%; font-weight: 600; font-size: 0.95rem; animation: marquee 15s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+        .running-text-wrapper:hover .running-text { animation-play-state: paused; }
 
         /* Content Sections */
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        .card { background: var(--card); padding: 26px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(15,23,42,0.05); margin-bottom: 20px; }
+        .badge { display: inline-block; background: var(--tint); color: var(--primary); padding: 5px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+        .badge.dry { background: #FEF3C7; color: #92400E; }
+        .badge.fresh { background: #DCFCE7; color: #166534; }
+        .badge.frozen { background: #E0F2FE; color: #075985; }
+        h3 { color: var(--primary); margin: 14px 0 8px 0; font-size: 1.35rem; letter-spacing: -0.01em; line-height: 1.3; }
+        p { line-height: 1.7; color: var(--muted); margin: 6px 0; }
+        .content-image { max-width: 100%; border-radius: 14px; margin-top: 14px; display: block; border: 1px solid var(--border); }
 
-        .content-section { display: none; } 
+        /* Kartu lokasi */
+        .wh { display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: center; }
+        .warehouse-img { width: 100%; height: auto; border-radius: 14px; display: block; }
+        .wh h3 { margin-top: 12px; }
+        .badges { display: flex; gap: 8px; flex-wrap: wrap; }
 
-        .content-section.active { display: block; } 
+        /* Tombol */
+        .actions, .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+        .actions { margin-top: 16px; }
+        .cta { margin: 0 0 20px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #fff; text-decoration: none; padding: 11px 20px; border-radius: 12px; font: inherit; font-weight: 600; font-size: 0.9rem; border: 0; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(11,58,130,0.18); }
+        .btn:hover { background: var(--accent); transform: translateY(-1px); }
+        .btn.ghost { background: #fff; color: var(--primary); border: 1px solid var(--border); box-shadow: none; }
+        .btn.ghost:hover { background: var(--tint); }
+        .btn.wa { background: #25d366; box-shadow: 0 4px 10px rgba(37,211,102,0.25); }
+        .btn.wa:hover { background: #1ebe5b; }
+        .card .cta { margin: 20px 0 0; }
 
-        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        /* --- KALKULATOR KOMISI --- */
+        .calculator-group { margin-bottom: 16px; }
+        .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); font-size: 0.92rem; }
+        .calculator-group input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; outline: none; font: inherit; font-size: 1rem; transition: 0.2s; background: var(--bg); }
+        .calculator-group input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(47,128,237,0.15); }
+        .btn-hitung { width: 100%; justify-content: center; font-size: 1rem; padding: 13px; }
+        .result-container { margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap; }
+        .result-box { flex: 1; min-width: 200px; padding: 16px 18px; background: var(--tint); border-left: 4px solid var(--accent); border-radius: 12px; }
+        .result-box h4 { margin: 0 0 6px 0; color: var(--text); font-size: 0.9rem; font-weight: 600; }
+        .result-box p { margin: 0; font-size: 1.35rem; font-weight: 800; color: var(--primary); }
 
-        .badge { background: #bce2fd; color: var(--primary); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-
-        h3 { color: var(--primary); margin: 15px 0 10px 0; font-size: 1.5rem; }
-
-        p { line-height: 1.6; color: #475569; }
-
-        .content-image { max-width: 100%; border-radius: 10px; margin-top: 15px; display: block; }
-
-        .warehouse-img { max-width: 250px; height: auto; border-radius: 10px; margin-top: 15px; display: block; }
-
-        
-
-        /* --- KALKULATOR KOMISI LOGIC --- */
-
-        .calculator-group { margin-bottom: 15px; }
-
-        .calculator-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
-
-        .calculator-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem; }
-
-        .calculator-group input:focus { border-color: var(--primary); }
-
-        .btn-hitung { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
-
-        .btn-hitung:hover { background: #802f77; }
-
-        .result-container { margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
-
-        .result-box { flex: 1; min-width: 200px; padding: 15px; background: #fdf2fb; border-left: 5px solid var(--primary); border-radius: 4px; }
-
-        .result-box h4 { margin: 0 0 5px 0; color: var(--text); }
-
-        .result-box p { margin: 0; font-size: 1.3rem; font-weight: bold; color: var(--primary); }
-
+        /* Mobile */
+        @media (max-width: 860px) {
+            body { display: block; }
+            nav { position: sticky; top: 0; width: 100%; height: auto; border-right: 0; border-bottom: 1px solid var(--border); padding: 14px 14px 10px; }
+            nav h2 { margin-bottom: 12px; }
+            nav ul { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; }
+            .nav-label { display: none; }
+            nav li:not(.nav-label) { flex: none; white-space: nowrap; background: var(--bg); margin: 0; }
+            nav li.active::before { display: none; }
+            main { margin-left: 0; width: 100%; padding: 18px 14px 40px; }
+            .banner-image-wrapper { height: 110px; }
+            .wh { grid-template-columns: 1fr; gap: 16px; }
+            .card { padding: 20px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .running-text { animation: none; padding-left: 16px; }
+            .content-section.active { animation: none; }
+            .btn { transition: none; }
+        }
     </style>
-
 </head>
-
 <body>
 
-
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+            <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/><circle cx="12" cy="8" r="6"/></symbol>
+            <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+            <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M16 3l5 4-3 3-2-1v12H8V9l-2 1-3-3 5-4a4 4 0 0 0 8 0z"/></symbol>
+            <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></symbol>
+            <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></symbol>
+            <symbol id="i-gift" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+            <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+            <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></symbol>
+            <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
+            <symbol id="i-help" viewBox="0 0 24 24"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-5H5a2 2 0 0 0-2 2z"/><path d="M21 17v1a3 3 0 0 1-3 3h-4"/></symbol>
+            <symbol id="i-book" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h6"/></symbol>
+            <symbol id="i-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+            <symbol id="i-hosp" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13zM12 9v6M9 12h6"/></symbol>
+            <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+            <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h13l-2 4 2 4H4"/></symbol>
+            <symbol id="i-go" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+        </defs>
+    </svg>
 
     <nav>
-
         <h2>Mitra Playbook</h2>
-
-        <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
-
+        <div class="search">
+            <svg class="ic"><use href="#i-search"/></svg>
+            <input type="text" id="searchInput" placeholder="Cari materi..." onkeyup="searchGlobal()">
+        </div>
         <ul id="menuList">
+            <li class="nav-label">Informasi umum</li>
+            <li onclick="openTab(event, 'Mitra Grading')"><svg class="ic"><use href="#i-trophy"/></svg>Mitra Grading</li>
+            <li class="active" onclick="openTab(event, 'lokasi-warehouse')"><svg class="ic"><use href="#i-pin"/></svg>Lokasi Warehouse</li>
+            <li onclick="openTab(event, 'seragam-atribut')"><svg class="ic"><use href="#i-shirt"/></svg>Seragam &amp; Atribut</li>
+            <li onclick="openTab(event, 'absensi')"><svg class="ic"><use href="#i-cal"/></svg>Absensi</li>
 
-            <li class="active" onclick="openTab(event, 'Mitra Grading')">🏆 Mitra Grading</li>
-            
-            <li onclick="openTab(event, 'lokasi-warehouse')">📍 Lokasi Warehouse</li>
-            
-            <li onclick="openTab(event, 'seragam-atribut')">👕 Seragam & Atribut</li>
+            <li class="nav-label">Kompensasi</li>
+            <li onclick="openTab(event, 'pembayaran')"><svg class="ic"><use href="#i-wallet"/></svg>Skema Pembayaran</li>
+            <li onclick="openTab(event, 'insentif-bsc')"><svg class="ic"><use href="#i-gift"/></svg>Insentif BSC</li>
+            <li onclick="openTab(event, 'bpjs')"><svg class="ic"><use href="#i-shield"/></svg>BPJS</li>
+            <li onclick="openTab(event, 'astro-get-astro')"><svg class="ic"><use href="#i-users"/></svg>Astro Get Astro</li>
 
-            <li onclick="openTab(event, 'absensi')">🗓️ Absensi</li>
-
-            <li onclick="openTab(event, 'pembayaran')">💵 Skema Pembayaran</li>
-
-            <li onclick="openTab(event, 'insentif-bsc')">💰 Insentif BSC</li>
-
-            <li onclick="openTab(event, 'bpjs')">🪪 BPJS</li>
-
-            <li onclick="openTab(event, 'astro-get-astro')">🧑‍🧒‍🧒 Astro Get Astro</li>
-
-            <li onclick="openTab(event, 'izin-berbayar')">📩 Izin Berbayar</li>
-
-            <li onclick="openTab(event, 'jenis-pelanggaran')">🚫 Jenis-Jenis Pelanggaran</li>
-
-            <li onclick="openTab(event, 'bantuan')">❓ Bantuan</li>
-
-            <li onclick="openTab(event, 'panduan')">📚 Panduan Proses Kerja</li>
-
+            <li class="nav-label">Aturan &amp; bantuan</li>
+            <li onclick="openTab(event, 'izin-berbayar')"><svg class="ic"><use href="#i-mail"/></svg>Izin Berbayar</li>
+            <li onclick="openTab(event, 'jenis-pelanggaran')"><svg class="ic"><use href="#i-alert"/></svg>Jenis-Jenis Pelanggaran</li>
+            <li onclick="openTab(event, 'bantuan')"><svg class="ic"><use href="#i-help"/></svg>Bantuan</li>
+            <li onclick="openTab(event, 'panduan')"><svg class="ic"><use href="#i-book"/></svg>Panduan Proses Kerja</li>
         </ul>
-
     </nav>
 
-
-
     <main>
-
         <div class="highlight-container">
-
             <div class="banner-image-wrapper">
-
-                <img src="coverbanner.png" alt="Pusat Informasi Mitra" class="content-image">
-
+                <img src="coverbanner.png" alt="Pusat Informasi Mitra">
             </div>
-
             <div class="running-text-wrapper">
-
                 <div class="running-text">
-
                     📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |     🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
-
                 </div>
-
             </div>
-
         </div>
-
-
 
         <div id="lokasi-warehouse" class="content-section active">
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/jrXSp3bLYAxUXpjq7?g_st=ac" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Dry Cibitung</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Dry Cibitung (CBT)</h3>
-
-                <p>Jl. Kp. Tangsi Jatiwangi No.74, Jatiwangi, Kec. Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530</p>
-
+            <div class="card wh">
                 <img src="CBT.png" alt="CBT" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/Q2ffTJvEh3Zw5cXSA?g_st=ac" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Dry Sentul</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Dry Sentul (STL)</h3>
-
-                <p>Jl. Olympic Raya No.A12, Leuwinutug, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16810</p>
-
-                <img src="STL.png" alt="STL" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/PHUnKsiRo7heKwde7" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Fresh Cibinong</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Fresh Cibinong (CBN)</h3>
-
-                <p>Jl. Bintang Mas No.88, Nanggewer Mekar, Kec. Cibinong, Kabupaten Bogor, Jawa Barat 16912</p>
-
-                <img src="CBN.png" alt="CBN" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/evm2U1DCBfPbW2SP8?g_st=ac" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Fresh Bogor</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Fresh Bogor (BGR)</h3>
-
-                <p>FR55+V44, Pasir Jambu, Sukaraja, Bogor Regency, West Java 16158</p>
-
-                <img src="BGO.png" alt="BGO" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/49bSHzA8HBz7Y7DH9?g_st=ac" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Frozen Pegangsaan</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Frozen Pegangsaan (PGS)</h3>
-
-                <p>Jl. Pegangsaan Dua No.5, RT.4/RW.3, Pegangsaan Dua, Kelapa Gading, North Jakarta City, Jakarta 14250</p>
-
-                <img src="PGS.png" alt="PGS" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/H2gHxCRd5U9phHzZ8" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Frozen Srengseng</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Frozen Srengseng (SRG)</h3>
-
-                <p>Jl. Srengseng Raya, RT.5/RW.1, Srengseng, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11630</p>
-
-                <img src="SRGG.png" alt="SRGG" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/6TeSDnadqfZ5o4NW9?g_st=ac" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Frozen Bitung</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Frozen Bitung (BIT)</h3>
-
-                <p>PHW3+8QQ, Curug Kulon, Curug, Tangerang Regency, Banten 15810</p>
-
-                <img src="BIT.png" alt="BIT" class="warehouse-img">
-
-            </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://maps.app.goo.gl/NJxoirXKAw1TVTPC7?g_st=awb" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Frozen Sunter</a>
-
-            </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Frozen Sunter (STR)</h3>
-
-                <p>VV8G+2XX, RT.6/RW.4, Papanggo, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14340</p>
-
-                <img src="STR.png" alt="STR" class="warehouse-img">
-
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge dry">Dry</span></div>
+                    <h3>Warehouse Dry Cibitung (CBT)</h3>
+                    <p>Jl. Kp. Tangsi Jatiwangi No.74, Jatiwangi, Kec. Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/jrXSp3bLYAxUXpjq7?g_st=ac" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
                 </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://share.google/rz60qGYjfFOdKVEvE" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   📌 Lokasi Warehouse Fresh Cikuda</a>
-
             </div>
-
-            <div class="card">
-
-                <span class="badge">Lokasi Warehouse</span>
-
-                <h3>Warehouse Fresh Cikuda (CKD)</h3>
-
-                <p>Jl. Raya Cikuda Wanaherang No.9, Wanaherang, Kec. Gn. Putri, Kabupaten Bogor, Jawa Barat 16965</p>
-
+            <div class="card wh">
+                <img src="STL.png" alt="STL" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge dry">Dry</span></div>
+                    <h3>Warehouse Dry Sentul (STL)</h3>
+                    <p>Jl. Olympic Raya No.A12, Leuwinutug, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16810</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/Q2ffTJvEh3Zw5cXSA?g_st=ac" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
+                <img src="CBN.png" alt="CBN" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge fresh">Fresh</span></div>
+                    <h3>Warehouse Fresh Cibinong (CBN)</h3>
+                    <p>Jl. Bintang Mas No.88, Nanggewer Mekar, Kec. Cibinong, Kabupaten Bogor, Jawa Barat 16912</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/PHUnKsiRo7heKwde7" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
+                <img src="BGO.png" alt="BGO" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge fresh">Fresh</span></div>
+                    <h3>Warehouse Fresh Bogor (BGR)</h3>
+                    <p>FR55+V44, Pasir Jambu, Sukaraja, Bogor Regency, West Java 16158</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/evm2U1DCBfPbW2SP8?g_st=ac" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
+                <img src="PGS.png" alt="PGS" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge frozen">Frozen</span></div>
+                    <h3>Warehouse Frozen Pegangsaan (PGS)</h3>
+                    <p>Jl. Pegangsaan Dua No.5, RT.4/RW.3, Pegangsaan Dua, Kelapa Gading, North Jakarta City, Jakarta 14250</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/49bSHzA8HBz7Y7DH9?g_st=ac" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
+                <img src="SRGG.png" alt="SRGG" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge frozen">Frozen</span></div>
+                    <h3>Warehouse Frozen Srengseng (SRG)</h3>
+                    <p>Jl. Srengseng Raya, RT.5/RW.1, Srengseng, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11630</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/H2gHxCRd5U9phHzZ8" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
+                <img src="BIT.png" alt="BIT" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge frozen">Frozen</span></div>
+                    <h3>Warehouse Frozen Bitung (BIT)</h3>
+                    <p>PHW3+8QQ, Curug Kulon, Curug, Tangerang Regency, Banten 15810</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/6TeSDnadqfZ5o4NW9?g_st=ac" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
+                <img src="STR.png" alt="STR" class="warehouse-img">
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge frozen">Frozen</span></div>
+                    <h3>Warehouse Frozen Sunter (STR)</h3>
+                    <p>VV8G+2XX, RT.6/RW.4, Papanggo, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14340</p>
+                    <div class="actions">
+                        <a class="btn" href="https://maps.app.goo.gl/NJxoirXKAw1TVPC7?g_st=awb" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card wh">
                 <img src="CKD.png" alt="CKD" class="warehouse-img">
-
+                <div>
+                    <div class="badges"><span class="badge">Lokasi Warehouse</span><span class="badge fresh">Fresh</span></div>
+                    <h3>Warehouse Fresh Cikuda (CKD)</h3>
+                    <p>Jl. Raya Cikuda Wanaherang No.9, Wanaherang, Kec. Gn. Putri, Kabupaten Bogor, Jawa Barat 16965</p>
+                    <div class="actions">
+                        <a class="btn" href="https://share.google/rz60qGYjfFOdKVEvE" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>
+                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                    </div>
+                </div>
             </div>
-
         </div>
-
-                
 
         <div id="seragam-atribut" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Grooming</span>
-
                 <h3>Warna Pakaian</h3>
-
                 <img src="Wseragam.png" alt="Warna Seragam" class="content-image">
-
             </div>
-
             <div class="card">
-
                 <span class="badge">Grooming</span>
-
                 <h3>Ketentuan Berpakaian Secara Keseluruhan</h3>
-
                 <img src="grooming1.png" alt="Warna Seragam" class="content-image">
-
             </div>
-
         </div>
-
-
 
         <div id="absensi" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Absensi</span>
-
                 <h3>Astro Crew</h3>
-
                 <img src="absenmasuk.png" class="content-image">
-
                 <img src="absenkeluar.png" class="content-image">
-
             </div>
-
         </div>
-
-
 
         <div id="pembayaran" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Pembayaran Komisi Harian</span>
-
                 <h3>New Joiner</h3>
-
                 <p>• Mitra yang join pada tanggal 25-10, dengan periode tutup buku sampai dengan tanggal 15, akan menerima komisi pertama kali pada tanggal 19</p>
-
                 <p>• Mitra yang join pada tanggal 11-24, dengan periode tutup buku sampai dengan tanggal akhir bulan, akan menerima komisi pertama kali pada tanggal 05</p>
-
-            </div> 
-
-            
-
-            <div class="card">
-
-                <span class="badge">Pembayaran Komisi Harian</span>
-
-                <h3>Mitra Existing</h3>
-
-                <p>Penerimaan komisi tanggal 05 setiap bulannya, dengan periode hitungan 01-30/31 setiap bulannya</p>
-
             </div>
 
-
+            <div class="card">
+                <span class="badge">Pembayaran Komisi Harian</span>
+                <h3>Mitra Existing</h3>
+                <p>Penerimaan komisi tanggal 05 setiap bulannya, dengan periode hitungan 01-30/31 setiap bulannya</p>
+            </div>
 
             <div class="card">
-
                 <span class="badge">Simulasi kalkulator komisi new joiner</span>
-
                 <h3>Ayo hitung komisimu disini!!!</h3>
-
                 <p>Kalkulator ini hanya simulasi, hasil perhitungan komisi bisa saja berbeda tergantung hari kerja aktual mitra. Masukkan tanggal join untuk menghitung estimasi pendapatan beserta tanggal pasti pencairannya, pastikan hari kerjamu sesuai sampai tanggal tutup buku yang sudah ditentukan.</p>
 
-                
-
-                <div class="calculator-group">
-
+                <div class="calculator-group" style="margin-top:18px">
                     <label for="joinDate">Tanggal Join (Join Date)</label>
-
                     <input type="date" id="joinDate">
-
                 </div>
 
-
-
                 <div class="calculator-group">
-
                     <label for="jumlahShift">Jumlah Hari Kerja / HK</label>
-
                     <input type="number" id="jumlahShift" placeholder="Contoh: 20" min="0">
-
                 </div>
-
-
 
                 <div class="calculator-group">
-
                     <label for="rateKomisi">Komisi Harian / per Shift (Rp)</label>
-
                     <input type="number" id="rateKomisi" placeholder="Contoh: 50000" min="0">
-
                 </div>
 
-
-
-                <button class="btn-hitung" onclick="hitungKomisiDanJadwal()">Hitung Otomatis</button>
-
-
+                <button class="btn btn-hitung" onclick="hitungKomisiDanJadwal()">Hitung Otomatis</button>
 
                 <div class="result-container">
-
                     <div class="result-box">
-
                         <h4>Total Komisi Diterima:</h4>
-
                         <p id="totalKomisiResult">Rp 0</p>
-
                     </div>
-
                     <div class="result-box">
-
                         <h4>Tanggal Pembayaran:</h4>
-
                         <p id="tanggalBayarResult">-</p>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
-
 
         <div id="insentif-bsc" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Insentif BSC Warehouse Staff</span>
-
                 <h3>Syarat dan Ketentuan</h3>
-
                 <p>• HK ≥ 20 hari → mendapatkan 100% BSC</p>
-
                 <p>• HK 16-19 hari → mendapatkan BSC prorata</p>
-
                 <img src="bscprorata.png" class="content-image">
-
                 <p>• Mitra yang join setelah tanggal 1 → tetap berhak BSC jika HK ≥ 16 hari</p>
-
                 <p>• Mitra yang memiliki kurang dari 16 hari kerja maka tidak mendapatkan BSC pada bulan tersebut</p>
-
                 <p>• Tidak memiliki izin lebih dari dua kali, atau alpha (tidak hadir tanpa keterangan)</p>
-
                 <p>• Mitra harus tetap bekerja hingga minimal tanggal 18 bulan berikutnya</p>
-
                 <p>• Jika terdapat satu hari alpha atau lebih, maka mitra tidak berhak menerima BSC</p>
-
                 <p>• 1 hari izin → Mendapatkan 85% BSC yang diterima bulan itu</p>
-
                 <p>• 2 hari izin → Mendapatkan 40% BSC yang diterima bulan itu</p>
-
                 <p>• Lebih dari 2 kali izin → Tidak mendapatkan BSC</p>
-
                 <p>• Telat maks 1 menit dalam 6x / Bulan = Gugur (Hangus) = Terminasi</p>
-
             </div>
-
-        </div>   
-
-        
+        </div>
 
         <div id="bpjs" class="content-section">
-
             <div class="card">
-
                 <span class="badge">BPJS Jaminan Kecelakaan Kerja (JKK)</span>
-
                 <h3>Prosedur Klaim BPJS JKK)</h3>
-
                 <img src="BPJSTK.png" class="content-image">
-
             </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://play.google.com/store/apps/details?id=com.bpjstku" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   🤖 Download aplikasi JMO(Jamsostek Mobile) disini</a>
-
+            <div class="cta">
+                <a class="btn" href="https://play.google.com/store/apps/details?id=com.bpjstku" target="_blank" rel="noopener"><svg class="ic"><use href="#i-dl"/></svg>Download aplikasi JMO(Jamsostek Mobile) disini</a>
+                <a class="btn ghost" href="https://www.bpjsketenagakerjaan.go.id/kontak.html#plkk" target="_blank" rel="noopener"><svg class="ic"><use href="#i-hosp"/></svg>Daftar fasilitas kesehatan rekanan BPJSTK</a>
             </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://www.bpjsketenagakerjaan.go.id/kontak.html#plkk" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   🏥 Daftar fasilitas kesehatan rekanan BPJSTK</a>
-
-            </div>
-
         </div>
-
-        
 
         <div id="astro-get-astro" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Astro Get Astro</span>
-
                 <h3>Daftarkan rekanmu dan dapatkan komisi senilai Rp. 100.000,-</h3>
-
                 <p>Syarat dan Ketentuan:</p>
-
                 <p>• jika rekanmu masih bergabung pada masa kerja 1 bulan, maka kamu berhak mendapatkan Rp. 30.000,-</p>
-
                 <p>• jika pada masa kerja ke-3 bulan rekanmu masih bergabung di Astro, maka kamu berhak mendapatkan Rp. 70.000,-</p>
-
             </div>
-
-            <div style="margin-top: 25px;">
-
-                <a href="https://bit.ly/astro-get-astro-referral" 
-
-                   target="_blank" 
-
-                   style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                   ▶️ Pengisian form Astro Get Astro 🧑🏻‍🚀</a>
-
+            <div class="cta">
+                <a class="btn" href="https://bit.ly/astro-get-astro-referral" target="_blank" rel="noopener"><svg class="ic"><use href="#i-go"/></svg>Pengisian form Astro Get Astro 🧑🏻‍🚀</a>
             </div>
-
         </div>
-
-
 
         <div id="izin-berbayar" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Izin Berbayar</span>
-
                 <h3>Syarat dan Ketentuan</h3>
-
                 <p>Berikut ini izin berbayar yang berlaku, apabila terdapat mitra yang tidak hadir karena alasan tersebut, maka komisi harian tetap dibayarkan dengan melampirkan bukti pendukung dan ketentuan sebagai berikut</p>
-
                 <p>Syarat dan Ketentuan:</p>
-
                 <p>• Izin sakit rawat jalan, durasi maksimal 1 hari/bulan</p>
-
                 <p>• Izin sakit rawat inap, durasi maksimal 10 hari/bulan</p>
-
                 <p>• Izin menikah, durasi 3 hari</p>
-
                 <p>• Izin berduka (keluarga inti), durasi 2 hari</p>
-
                 <p>• Izin berduka (keluarga satu rumah), durasi 1 hari</p>
-
                 <p>• Izin pasangan melahirkan, durasi 2 hari</p>
-
             </div>
-
         </div>
-
-
 
         <div id="jenis-pelanggaran" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Jenis-Jenis Pelanggaran</span>
-
                 <h3>Berikut ini merupakan jenis-jenis pelanggaran(Thorny Stick)</h3>
-
                 <p>Jika kamu menemukan pelanggaran, silahkan laporkan melalui link berikut ini</p>
-
                 <img src="pelaporan.png" class="content-image">
-
-                <div style="margin-top: 25px;">
-
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeemPOoY3fWvrXl0Rj3C005DjZe5R7rM04yLSCFWds9adiiNA/viewform" 
-
-                       target="_blank" 
-
-                       style="background-color: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(3, 57, 128, 0.2); transition: 0.2s;">
-
-                       ▶️ Pelaporan Pelanggaran</a>
-
+                <div class="cta">
+                    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeemPOoY3fWvrXl0Rj3C005DjZe5R7rM04yLSCFWds9adiiNA/viewform" target="_blank" rel="noopener"><svg class="ic"><use href="#i-flag"/></svg>Pelaporan Pelanggaran</a>
                 </div>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran hukum</h3>
-
                 <p>• Terbukti melakukan segala jenis tindak pidana yang diatur oleh KUHP</p>
-
                 <p>• Vandalisme atau tindakan perusakan terhadap properti</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran Operational</h3>
-
                 <p>• Absensi/Ketidakhadiran Tanpa izin (Bolos kerja)</p>
-
                 <p>• Terlambat berulang tanpa izin dan bukti yang jelas</p>
-
                 <p>• Pelanggaran jam kerja</p>
-
                 <p>• Tidak mengikuti SOP Prosedur</p>
-
                 <p>• Kelalaian yang menyebabkan kerusakan barang (Asset/SKU Item/Consumable/Customer)</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran Keuangan</h3>
-
                 <p>• Pencurian uang atau barang</p>
-
                 <p>• Penyalahgunaan diskon, kupon, barang promo</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran Customer</h3>
-
                 <p>• Perilaku Tidak Sopan terhadap customer</p>
-
                 <p>• Menyalahgunakan informasi customer</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran SDM</h3>
-
                 <p>• Pelecehan</p>
-
                 <p>• Diskriminasi</p>
-
                 <p>• Pelanggaran Kontrak Kerja</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran IT</h3>
-
                 <p>• Penyalahgunaan perangkat IT</p>
-
                 <p>• Merubah posisi aset selain keperluan operasional</p>
-
                 <p>• Pelanggaran Manipulasi Data</p>
-
                 <p>• Membocorkan sistem internal (membagikan data penjualan, sistem inventaris ke pihak luar)</p>
-
             </div>
-
             <div class="card">
-
-                <h3>Pelanggaran 5R & K3</h3>
-
+                <h3>Pelanggaran 5R &amp; K3</h3>
                 <p>• Mengabaikan protokol 5R (Ringkas, Rapi, Resik, Rawat dan Rajin)</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran Etika</h3>
-
                 <p>• Konflik Kepentingan</p>
-
                 <p>• Memberi dan/atau Menerima Suap/Gratifikasi</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Pelanggaran Reputasi Perusahaan</h3>
-
                 <p>• Mencitrakan buruk Perusahaan</p>
-
                 <p>• Menggunakan seragam/nama Perusahaan untuk tindakan ilegal, pelanggaran norma atau pelanggaran hukum</p>
-
             </div>
-
             <div class="card">
-
                 <h3>Sanksi atas Pelanggaran (Thorny Stick)</h3>
-
                 <p>• Mitra yang terbukti melakukan pelanggaran terhadap ketentuan dalam Thorny Stick akan dikenakan sanksi berupa:</p>
-
                 <p>• Surat Peringatan (SP)</p>
-
                 <p>• Hingga Terminasi/PHK</p>
-
                 <h3> Penetapan sanksi dilakukan berdasarkan keputusan bersama dari:</h3>
-
                 <p>•SPV (Supervisor)</p>
-
                 <p>•Manager</p>
-
                 <p>•Mitra Management</p>
-
             </div>
-
         </div>
-
-        
 
         <div id="bantuan" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Bantuan</span>
-
                 <h3>Silahkan hubungi SPV masing-masing, jika kamu mengalami kendala dibawah ini:</h3>
-
                 <p>• Pengajuan perubahan data diri, seperti : Nomer rekening, No HP, Email</p>
-
                 <p>• Kendala Absensi</p>
-
                 <p>• Kendala Komisi/BSC, seperti : Selisih jumlah saat penerimaan, terlambat ditransfer melebihi tanggal yang sudah ditentukan</p>
-
                 <p>• Kendala Akun Astro Crew, seperti : Auto Cleansing, Kendala login</p>
-
                 <p>• Jika masih perlu bantuan lebih lanjut, bisa menghubungi tim People melalui kontak Hotline di bawah ini</p>
-
-                
-
-                <div style="margin-top: 25px;">
-
-                    <a href="https://wa.me/6281398440178?text=Halo%20SPV,%20saya%20mengalami%20kendala%20terkait%20operasional." 
-
-                       target="_blank" 
-
-                       style="background-color: #25d366; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2); transition: 0.2s;">
-
-                       💬 Hotline Astro</a>
-
+                <div class="cta">
+                    <a class="btn wa" href="https://wa.me/6281398440178?text=Halo%20SPV,%20saya%20mengalami%20kendala%20terkait%20operasional." target="_blank" rel="noopener"><svg class="ic"><use href="#i-chat"/></svg>Hotline Astro</a>
+                </div>
             </div>
-
         </div>
-
-
 
         <div id="panduan" class="content-section">
-
             <div class="card">
-
                 <span class="badge">Panduan Proses Kerja</span>
-
                 <h3>Berikut panduan proses kerja per masing - masing role dari mulai persiapan aset hingga proses pada sistem.</h3>
-
                 <p>• Untuk detail lebih lanjut silahkan klik link dibawah ini</p>
-
-        
-
-                <div style="margin-top: 25px;">
-
-                    <a href="https://trainermitrawarehouse.github.io/Proseskerjawh/" 
-
-                       target="_blank" 
-
-                       style="background-color: #25d366; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2); transition: 0.2s;">
-
-                       📚 Panduan Proses Kerja</a>
-
+                <div class="cta">
+                    <a class="btn wa" href="https://trainermitrawarehouse.github.io/Proseskerjawh/" target="_blank" rel="noopener"><svg class="ic"><use href="#i-book"/></svg>Panduan Proses Kerja</a>
+                </div>
             </div>
-
         </div>
-
-    </div>
-
-                        
-
     </main>
 
-        
-
 <script>
+    let currentTab = 'lokasi-warehouse';
 
     function openTab(evt, tabName) {
+        currentTab = tabName;
+        document.getElementById('searchInput').value = '';
+        document.querySelectorAll('.card').forEach(c => c.style.display = '');
 
-        let sections = document.getElementsByClassName("content-section");
-
-        for (let i = 0; i < sections.length; i++) {
-
-            sections[i].classList.remove("active");
-
-        }
-
-
-
-        let menuItems = document.querySelectorAll("#menuList li");
-
-        menuItems.forEach(item => item.classList.remove("active"));
-
-
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('#menuList li').forEach(item => item.classList.remove('active'));
 
         let targetSection = document.getElementById(tabName);
-
-        if(targetSection) {
-
-            targetSection.classList.add("active");
-
-        }
-
-        evt.currentTarget.classList.add("active");
-
+        if (targetSection) targetSection.classList.add('active');
+        evt.currentTarget.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-
 
     function searchGlobal() {
+        let input = document.getElementById('searchInput').value.toLowerCase().trim();
+        let sections = document.querySelectorAll('.content-section');
 
-        let input = document.getElementById('searchInput').value.toLowerCase();
-
-        let cards = document.getElementsByClassName('card');
-
-
-
-        for (let i = 0; i < cards.length; i++) {
-
-            let text = cards[i].innerText.toLowerCase();
-
-
-
-            if (text.includes(input)) {
-
-                cards[i].style.display = "block";
-
-                cards[i].parentElement.classList.add("active");
-
-            } else {
-
-                cards[i].style.display = "none";
-
-            }
-
-        }
-
+        sections.forEach(sec => {
+            let hasMatch = false;
+            sec.querySelectorAll('.card').forEach(card => {
+                let match = !input || card.innerText.toLowerCase().includes(input);
+                card.style.display = match ? '' : 'none';
+                if (match) hasMatch = true;
+            });
+            if (input) sec.classList.toggle('active', hasMatch);
+            else sec.classList.toggle('active', sec.id === currentTab);
+        });
     }
 
-
+    function copyAddr(btn) {
+        let text = btn.closest('.wh').querySelector('p').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            let old = btn.textContent;
+            btn.textContent = 'Tersalin ✓';
+            setTimeout(() => btn.textContent = old, 1500);
+        });
+    }
 
     function hitungKomisiDanJadwal() {
-
         let joinDateVal = document.getElementById('joinDate').value;
-
         let shift = parseFloat(document.getElementById('jumlahShift').value) || 0;
-
         let rate = parseFloat(document.getElementById('rateKomisi').value) || 0;
 
-        
-
         if (!joinDateVal) {
-
             alert("Silakan pilih Tanggal Join terlebih dahulu!");
-
             return;
-
         }
-
-
 
         let totalUang = shift * rate;
-
         let formatRupiah = new Intl.NumberFormat('id-ID', {
-
             style: 'currency', currency: 'IDR', minimumFractionDigits: 0
-
         }).format(totalUang);
-
         document.getElementById('totalKomisiResult').innerText = formatRupiah;
 
-
-
         let parts = joinDateVal.split('-');
-
         let tahunJoin = parseInt(parts[0], 10);
-
-        let bulanJoin = parseInt(parts[1], 10) - 1; 
-
+        let bulanJoin = parseInt(parts[1], 10) - 1;
         let tanggalJoin = parseInt(parts[2], 10);
 
-
-
         let tanggalBayar = 0;
-
         let targetBulan = bulanJoin;
-
         let targetTahun = tahunJoin;
 
-
-
         if (tanggalJoin >= 25) {
-
             tanggalBayar = 19;
-
-            targetBulan = bulanJoin + 1; 
-
-        } 
-
+            targetBulan = bulanJoin + 1;
+        }
         else if (tanggalJoin <= 10) {
-
             tanggalBayar = 19;
-
-            targetBulan = bulanJoin;     
-
+            targetBulan = bulanJoin;
         }
-
         else if (tanggalJoin >= 11 && tanggalJoin <= 24) {
-
             tanggalBayar = 5;
-
-            targetBulan = bulanJoin + 1; 
-
+            targetBulan = bulanJoin + 1;
         }
-
-
 
         let gajianDate = new Date(targetTahun, targetBulan, tanggalBayar);
-
         let opsiFormat = { day: '2-digit', month: 'long', year: 'numeric' };
-
         let formatTanggalFinal = gajianDate.toLocaleDateString('id-ID', opsiFormat);
 
-
-
         document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
-
     }
-
 </script>
-
 </body>
-
-</html> 
-
+</html>
