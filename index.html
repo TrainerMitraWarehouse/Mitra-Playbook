@@ -62,6 +62,7 @@
         h3 { color: var(--primary); margin: 14px 0 8px 0; font-size: 1.35rem; letter-spacing: -0.01em; line-height: 1.3; }
         p { line-height: 1.7; color: var(--muted); margin: 6px 0; }
         .content-image { max-width: 100%; border-radius: 14px; margin-top: 14px; display: block; border: 1px solid var(--border); }
+        .content-video { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; margin-top: 14px; display: block; border: 1px solid var(--border); }
 
         /* Kartu lokasi */
         .wh { display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: center; }
@@ -118,6 +119,7 @@
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
         <defs>
             <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+            <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
             <symbol id="i-loudspeaker" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
             <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
             <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M16 3l5 4-3 3-2-1v12H8V9l-2 1-3-3 5-4a4 4 0 0 0 8 0z"/></symbol>
@@ -166,12 +168,12 @@
     </nav>
 
     <main>
-        <div class="highlight-container">
+        <div class="highlight-container" id="highlight-container">
             <div class="banner-image-wrapper">
-                <img src="coverbanner.png" alt="Pusat Informasi Mitra">
+                <img id="bannerImage" src="coverbanner.png" alt="Pusat Informasi Mitra">
             </div>
             <div class="running-text-wrapper">
-                <div class="running-text">
+                <div class="running-text" id="runningTextContent">
                     📢 Tidak ada target yang lebih penting daripada proses yang benar, jaga akurasi! jaga Integritas!      |     🚀 Semangat bekerja hari ini, jangan lupa selalu gunakan atribut lengkap!
                 </div>
             </div>
@@ -182,9 +184,9 @@
                 <span class="badge">Other Information</span>
                 <h3></h3>
                 <img src="Artikel MG.png" alt="Mitra Grading" class="content-image">
-                </div>
             </div>
         </div>
+
         <div id="lokasi-warehouse" class="content-section">
             <div class="card wh">
                 <img src="CBT.png" alt="CBT" class="warehouse-img">
@@ -307,6 +309,7 @@
                 </div>
             </div>
         </div>
+
         <div id="seragam-atribut" class="content-section">
             <div class="card">
                 <span class="badge">Grooming</span>
@@ -330,19 +333,23 @@
         </div>
 
         <div id="pembayaran" class="content-section">
-            <div class="card">
-                <span class="badge">Pembayaran Komisi Harian</span>
-                <h3>New Joiner</h3>
-                <p>• Mitra yang join pada tanggal 25-10, dengan periode tutup buku sampai dengan tanggal 15, akan menerima komisi pertama kali pada tanggal 19</p>
-                <p>• Mitra yang join pada tanggal 11-24, dengan periode tutup buku sampai dengan tanggal akhir bulan, akan menerima komisi pertama kali pada tanggal 05</p>
+            <!-- Wadah kartu dinamis dari Google Sheets (Tab: Pembayaran) -->
+            <div id="pembayaran-cards">
+                <div class="card">
+                    <span class="badge">Pembayaran Komisi Harian</span>
+                    <h3>New Joiner</h3>
+                    <p>• Mitra yang join pada tanggal 25-10, dengan periode tutup buku sampai dengan tanggal 15, akan menerima komisi pertama kali pada tanggal 19</p>
+                    <p>• Mitra yang join pada tanggal 11-24, dengan periode tutup buku sampai dengan tanggal akhir bulan, akan menerima komisi pertama kali pada tanggal 05</p>
+                </div>
+
+                <div class="card">
+                    <span class="badge">Pembayaran Komisi Harian</span>
+                    <h3>Mitra Existing</h3>
+                    <p>Penerimaan komisi tanggal 05 setiap bulannya, dengan periode hitungan 01-30/31 setiap bulannya</p>
+                </div>
             </div>
 
-            <div class="card">
-                <span class="badge">Pembayaran Komisi Harian</span>
-                <h3>Mitra Existing</h3>
-                <p>Penerimaan komisi tanggal 05 setiap bulannya, dengan periode hitungan 01-30/31 setiap bulannya</p>
-            </div>
-
+            <!-- Kalkulator Simulasi Tetap (Tidak terhapus saat Google Sheets update) -->
             <div class="card">
                 <span class="badge">Simulasi kalkulator komisi new joiner</span>
                 <h3>Ayo hitung komisimu disini!!!</h3>
@@ -537,7 +544,238 @@
     </main>
 
 <script>
-    let currentTab = 'lokasi-warehouse';
+    /* =========================================================================
+       1. KONFIGURASI LINK CSV GOOGLE SHEETS (TEMPEL LINK PUBLISH TO WEB DI SINI)
+       Isi link CSV untuk tab yang ingin diupdate otomatis dari Google Sheets.
+       ========================================================================= */
+    const SHEET_CSV_URLS = {
+        "Banner_Highlight"  : "", // Tempel link CSV tab Banner_Highlight
+        "Other_Information" : "", // Tempel link CSV tab Other_Information
+        "Lokasi_Warehouse"  : "", // Tempel link CSV tab Lokasi_Warehouse
+        "Seragam_Atribut"   : "", // Tempel link CSV tab Seragam_Atribut
+        "Absensi"           : "", // Tempel link CSV tab Absensi
+        "Pembayaran"        : "", // Tempel link CSV tab Pembayaran
+        "Insentif_BSC"      : "", // Tempel link CSV tab Insentif_BSC
+        "BPJS"              : "", // Tempel link CSV tab BPJS
+        "Astro_Get_Astro"   : "", // Tempel link CSV tab Astro_Get_Astro
+        "Izin_Berbayar"     : "", // Tempel link CSV tab Izin_Berbayar
+        "Jenis_Pelanggaran" : "", // Tempel link CSV tab Jenis_Pelanggaran
+        "Bantuan"           : "", // Tempel link CSV tab Bantuan
+        "Panduan_Kerja"     : ""  // Tempel link CSV tab Panduan_Kerja
+    };
+
+    const TAB_TO_HTML_ID = {
+        "Other_Information" : "Other Information",
+        "Lokasi_Warehouse"  : "lokasi-warehouse",
+        "Seragam_Atribut"   : "seragam-atribut",
+        "Absensi"           : "absensi",
+        "Pembayaran"        : "pembayaran-cards",
+        "Insentif_BSC"      : "insentif-bsc",
+        "BPJS"              : "bpjs",
+        "Astro_Get_Astro"   : "astro-get-astro",
+        "Izin_Berbayar"     : "izin-berbayar",
+        "Jenis_Pelanggaran" : "jenis-pelanggaran",
+        "Bantuan"           : "bantuan",
+        "Panduan_Kerja"     : "panduan"
+    };
+
+    /* =========================================================================
+       2. PARSER CSV & HELPER MEDIA (GOOGLE DRIVE / YOUTUBE)
+       ========================================================================= */
+    function parseCSV(text) {
+        const rows = [];
+        let row = [], cell = "", inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+            const c = text[i], next = text[i + 1];
+            if (c === '"' && inQuotes && next === '"') { cell += '"'; i++; }
+            else if (c === '"') { inQuotes = !inQuotes; }
+            else if (c === ',' && !inQuotes) { row.push(cell.trim()); cell = ""; }
+            else if ((c === '\n' || (c === '\r' && next === '\n')) && !inQuotes) {
+                if (c === '\r') i++;
+                row.push(cell.trim());
+                rows.push(row);
+                row = []; cell = "";
+            } else {
+                cell += c;
+            }
+        }
+        if (cell.length > 0 || row.length > 0) { row.push(cell.trim()); rows.push(row); }
+        return rows;
+    }
+
+    function formatMediaUrl(url) {
+        if (!url) return "";
+        const gdriveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (url.includes("drive.google.com") && gdriveMatch) {
+            return `https://drive.google.com/uc?export=view&id=${gdriveMatch[1]}`;
+        }
+        return url;
+    }
+
+    function formatYoutubeUrl(url) {
+        if (!url) return "";
+        const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+        if (ytMatch) {
+            return `https://www.youtube.com/embed/${ytMatch[1]}`;
+        }
+        return url;
+    }
+
+    function buildMediaBlock(tipeMedia, linkMedia, altText) {
+        const mediaType = (tipeMedia || "").toLowerCase();
+        if (!linkMedia || mediaType === "none") return "";
+        // Mendukung banyak link dipisah tanda "|" (contoh: absenmasuk.png | absenkeluar.png)
+        const links = linkMedia.split("|").map(l => l.trim()).filter(Boolean);
+        return links.map(link => {
+            if (mediaType === "foto") {
+                return `<img src="${formatMediaUrl(link)}" alt="${altText}" class="content-image">`;
+            } else if (mediaType === "video") {
+                return `<iframe class="content-video" src="${formatYoutubeUrl(link)}" frameborder="0" allowfullscreen></iframe>`;
+            }
+            return "";
+        }).join("");
+    }
+
+    function buildButtonClass(gaya) {
+        const g = (gaya || "").toLowerCase().trim();
+        if (g === "ghost") return "btn ghost";
+        if (g === "wa") return "btn wa";
+        return "btn";
+    }
+
+    /* =========================================================================
+       3. SINKRONISASI DATA DARI GOOGLE SHEETS KE WEB
+       ========================================================================= */
+    async function loadAllSheets() {
+        // A. Banner & Running Text
+        if (SHEET_CSV_URLS["Banner_Highlight"]) {
+            try {
+                const res = await fetch(SHEET_CSV_URLS["Banner_Highlight"]);
+                const rows = parseCSV(await res.text());
+                const headerIdx = rows.findIndex(r => r[0] === "ID_Item");
+                if (headerIdx !== -1) {
+                    rows.slice(headerIdx + 1).forEach(col => {
+                        const [id, tipeElemen, teks, tipeMedia, linkMedia, status] = col;
+                        if ((status || "").toLowerCase() !== "aktif") return;
+                        if (id === "1" && linkMedia) {
+                            document.getElementById("bannerImage").src = formatMediaUrl(linkMedia);
+                        }
+                        if (id === "2" && teks) {
+                            document.getElementById("runningTextContent").textContent = teks;
+                        }
+                    });
+                }
+            } catch (e) { console.error("Gagal memuat Banner_Highlight:", e); }
+        }
+
+        // B. Lokasi Warehouse
+        if (SHEET_CSV_URLS["Lokasi_Warehouse"]) {
+            try {
+                const res = await fetch(SHEET_CSV_URLS["Lokasi_Warehouse"]);
+                const rows = parseCSV(await res.text());
+                const headerIdx = rows.findIndex(r => r[0] === "ID_Item");
+                if (headerIdx !== -1) {
+                    let html = "";
+                    rows.slice(headerIdx + 1).forEach(col => {
+                        const [id, badgeUtama, tipeWh, namaWh, alamat, foto, maps, status] = col;
+                        if (!namaWh || (status || "").toLowerCase() !== "aktif") return;
+                        const badgeClass = (tipeWh || "").toLowerCase();
+                        const imgUrl = formatMediaUrl(foto);
+                        html += `
+                            <div class="card wh" data-item-id="${id}">
+                                ${imgUrl ? `<img src="${imgUrl}" alt="${namaWh}" class="warehouse-img">` : ""}
+                                <div>
+                                    <div class="badges">
+                                        <span class="badge">${badgeUtama || "Lokasi Warehouse"}</span>
+                                        ${tipeWh ? `<span class="badge ${badgeClass}">${tipeWh}</span>` : ""}
+                                    </div>
+                                    <h3>${namaWh}</h3>
+                                    <p>${alamat}</p>
+                                    <div class="actions">
+                                        ${maps ? `<a class="btn" href="${maps}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg>Buka di Google Maps</a>` : ""}
+                                        <button class="btn ghost" onclick="copyAddr(this)">Salin Alamat</button>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                    if (html) document.getElementById("lokasi-warehouse").innerHTML = html;
+                }
+            } catch (e) { console.error("Gagal memuat Lokasi_Warehouse:", e); }
+        }
+
+        // C. Menu Standar Lainnya
+        const standardTabs = [
+            "Other_Information", "Seragam_Atribut", "Absensi", "Pembayaran",
+            "Insentif_BSC", "BPJS", "Astro_Get_Astro", "Izin_Berbayar",
+            "Jenis_Pelanggaran", "Bantuan", "Panduan_Kerja"
+        ];
+
+        for (const tabName of standardTabs) {
+            const csvUrl = SHEET_CSV_URLS[tabName];
+            if (!csvUrl) continue;
+
+            try {
+                const res = await fetch(csvUrl);
+                const rows = parseCSV(await res.text());
+                const headerIdx = rows.findIndex(r => r[0] === "ID_Item");
+                if (headerIdx === -1) continue;
+
+                let html = "";
+                rows.slice(headerIdx + 1).forEach(col => {
+                    const [id, badge, judul, deskripsi, tipeMedia, linkMedia, btn1Text, btn1Link, btn1Style, btn2Text, btn2Link, btn2Style, status] = col;
+                    if ((status || "").toLowerCase() !== "aktif") return;
+                    if (!badge && !judul && !deskripsi && !linkMedia) return;
+
+                    const mediaBlock = buildMediaBlock(tipeMedia, linkMedia, judul || badge);
+                    let mediaInsertedInline = false;
+
+                    // Ubah teks dipisahkan tanda "|" menjadi paragraf <p>, sub-judul [H3], atau sisipan [MEDIA]
+                    const paragrafHtml = (deskripsi || "")
+                        .split("|")
+                        .map(p => p.trim())
+                        .filter(Boolean)
+                        .map(p => {
+                            if (p === "[MEDIA]") {
+                                mediaInsertedInline = true;
+                                return mediaBlock;
+                            }
+                            if (p.startsWith("[H3]")) {
+                                return `<h3>${p.replace("[H3]", "").trim()}</h3>`;
+                            }
+                            return `<p>${p}</p>`;
+                        })
+                        .join("");
+
+                    let ctaHtml = "";
+                    if ((btn1Text && btn1Link) || (btn2Text && btn2Link)) {
+                        ctaHtml = `<div class="cta">
+                            ${btn1Text && btn1Link ? `<a class="${buildButtonClass(btn1Style)}" href="${btn1Link}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-go"/></svg>${btn1Text}</a>` : ""}
+                            ${btn2Text && btn2Link ? `<a class="${buildButtonClass(btn2Style)}" href="${btn2Link}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-go"/></svg>${btn2Text}</a>` : ""}
+                        </div>`;
+                    }
+
+                    html += `
+                        <div class="card" data-item-id="${id}">
+                            ${badge ? `<span class="badge">${badge}</span>` : ""}
+                            ${judul ? `<h3>${judul}</h3>` : ""}
+                            ${paragrafHtml}
+                            ${!mediaInsertedInline ? mediaBlock : ""}
+                            ${ctaHtml}
+                        </div>`;
+                });
+
+                const targetEl = document.getElementById(TAB_TO_HTML_ID[tabName]);
+                if (html && targetEl) targetEl.innerHTML = html;
+            } catch (e) {
+                console.error(`Gagal memuat tab ${tabName}:`, e);
+            }
+        }
+    }
+
+    /* =========================================================================
+       4. FUNGSI INTERAKTIF ASLI PORTAL (TETAP UTUH 100%)
+       ========================================================================= */
+    let currentTab = 'Other Information';
 
     function openTab(evt, tabName) {
         currentTab = tabName;
@@ -622,6 +860,9 @@
 
         document.getElementById('tanggalBayarResult').innerText = formatTanggalFinal;
     }
+
+    // Muat data dari Google Sheets saat halaman selesai dibuka
+    window.addEventListener('DOMContentLoaded', loadAllSheets);
 </script>
 </body>
 </html>
