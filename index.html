@@ -398,7 +398,7 @@
         if (!url) return "";
         const gdriveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
         if (url.includes("drive.google.com") && gdriveMatch) {
-            return `https://drive.google.com/uc?export=view&id=${gdriveMatch[1]}`;
+            return `https://drive.google.com/thumbnail?id=${gdriveMatch[1]}&sz=w1600`;
         }
         return url;
     }
