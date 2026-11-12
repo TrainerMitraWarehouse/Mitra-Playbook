@@ -442,7 +442,7 @@
             try {
                 const res = await fetch(SHEET_CSV_URLS["Banner_Highlight"]);
                 const rows = parseCSV(await res.text());
-                const headerIdx = rows.findIndex(r => r[0] === "ID_Item");
+                const headerIdx = rows.findIndex(r => (r[0] || "").includes("ID_Item"));
                 if (headerIdx !== -1) {
                     rows.slice(headerIdx + 1).forEach(col => {
                         const [id, tipeElemen, teks, tipeMedia, linkMedia, status] = col;
@@ -463,7 +463,7 @@
             try {
                 const res = await fetch(SHEET_CSV_URLS["Lokasi_Warehouse"]);
                 const rows = parseCSV(await res.text());
-                const headerIdx = rows.findIndex(r => r[0] === "ID_Item");
+                const headerIdx = rows.findIndex(r => (r[0] || "").includes("ID_Item"));
                 if (headerIdx !== -1) {
                     let html = "";
                     rows.slice(headerIdx + 1).forEach(col => {
@@ -507,7 +507,7 @@
             try {
                 const res = await fetch(csvUrl);
                 const rows = parseCSV(await res.text());
-                const headerIdx = rows.findIndex(r => r[0] === "ID_Item");
+                const headerIdx = rows.findIndex(r => (r[0] || "").includes("ID_Item"));
                 if (headerIdx === -1) continue;
 
                 let html = "";
